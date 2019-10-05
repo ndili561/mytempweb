@@ -1,0 +1,35 @@
+﻿@model CRM.Entity.Search.Employee.UserSearchModel
+@{
+    ViewData["Title"] = "Application Role";
+}
+<form asp-action="ApplicationUserGrid" method="get">
+    <input type="hidden" asp-for="@Model.TargetGridId" />
+    <input type="hidden" asp-for="@Model.ApplicationId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="display: none">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("ApplicationUserGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        attachSearchGridEvents();
+        $('.btn-filter').click();
+    });
+</script>
+

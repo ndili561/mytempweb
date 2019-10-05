@@ -1,0 +1,50 @@
+﻿@model CRM.Entity.Model.Common.TenantDto
+<form id="editTenant" class="form-horizontal" role="form" asp-controller="Tenant" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group m-b">
+            <label asp-for="Person.Forename" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Person.Forename" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Person.Surname" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Person.Surname" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="TenantCode" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="TenantCode" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="TenancyReference" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="TenancyReference" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="TenancyType" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="TenancyType" class="form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editAddressType").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

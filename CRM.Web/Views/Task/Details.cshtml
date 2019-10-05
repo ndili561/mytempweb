@@ -1,0 +1,104 @@
+﻿@using CRM.Entity.Model.Employee
+@model TaskDto
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RowVersion)
+<p>
+    <span class="text-danger">@Model.ErrorMessage</span>
+    <span>@Html.ValidationSummary(true)</span>
+</p>
+<div class="ibox-content" style="border-style:none">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" id="tabDetails" href="#tab-Details">Details</a></li>
+            <li class=""><a data-toggle="tab" id="tabApplicationTasks" href="#tab-Applications" onclick="loadApplicationTask(@Model.Id)">Linked Applications</a></li>
+            <li class=""><a data-toggle="tab" id="tabChangeLog" href="#tab-ChangeLog" onclick="loadTaskChangeLog(@Model.Id)">Change Log</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-Details" class="tab-pane active">
+                <div class="panel-body" id="divTaskDetail">
+                    @Html.Partial("_Details", Model)
+                </div>
+            </div>
+            <div id="tab-Applications" class="tab-pane">
+                <div class="panel-body" id="divApplicationTasks">
+
+                </div>
+            </div>
+            <div id="tab-ChangeLog" class="tab-pane">
+                <div class="panel-body" id="divTaskChangeLog">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var dualListbox;
+        $(document).ready(function () {
+            $('.tagsinput').tagsinput({
+                tagClass: 'label label-primary'
+            });
+            $('.colorpicker').colorpicker();
+        });
+
+        function loadApplicationTask(taskId) {
+            getDataFromServer('/Task/ApplicationTask', taskId, "#divApplicationTasks");
+        }
+
+        function loadChangeLog(taskId) {
+            getDataFromServer('/Task/ChangeLog', taskId, "#divTaskChangeLog");
+        }
+
+        function getDataFromServer(url, taskId, divId) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { taskId: taskId },
+                success: function(result) {
+                    $(divId).html(result);
+                    dualListbox = $('.dual_select').bootstrapDualListbox({
+                        selectorMinimalHeight: 160
+                    });
+                }
+            });
+        }
+
+        function updateTaskDetails() {
+            var url = "/Task/Save";
+            var form = $("#frmTaskDetails");
+            var model = objectifyForm(form.serializeArray());
+            postDataToServer(url, model);
+        }
+
+        function updateApplicationTasks() {
+            var form = $("#frmApplicationTask");
+            var model = objectifyForm(form.serializeArray());
+            model.LinkedApplicationTaskIds = $(dualListbox).val();
+            var url = "/Task/Save";
+            postDataToServer(url, model);
+        }
+
+        function postDataToServer(url, model) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: model,
+                success: function (result) {
+                    if (result.message) {
+                        if (!result.success) {
+                            displayErrorMessage(result.message);
+                        } else {
+                            displaySuccessMessage(result.message);
+                        }
+
+                    } else {
+                        $("#taskDetails").html(result);
+                    }
+                }
+            });
+        }
+    </script>
+
+}

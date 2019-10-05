@@ -1,0 +1,62 @@
+﻿@using CRM.Entity.Model.Employee
+@model TaskDto
+<form id="frmTaskDetails" class="form-horizontal" role="form">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    @Html.HiddenFor(model => model.IsActive)
+    <input type="hidden" asp-for="UpdateLinkedApplication" value="false" />
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Name" class="form-control m-b" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskCss" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="TaskCss" class="form-control tagsinput m-b" />
+                <span asp-validation-for="TaskCss" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="BackgroundColor" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="BackgroundColor" class="form-control m-b colorpicker" />
+                <span asp-validation-for="BackgroundColor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskDuration" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="TaskDuration" asp-items="Html.GetEnumSelectList<CRM.Entity.Enum.TaskDuration>()" class="form-control dropdown m-b"></select>
+                <span asp-validation-for="TaskDuration" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Comment" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Comment" class="form-control m-b" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="IsActive" class="col-md-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="IsActive" class="form-control m-b" />
+                </div>
+            </div>*@
+    </div>
+
+</form>
+<div class="ibox m-t">
+    <div class="pull-left m-l">
+        <button type="button" onclick="updateTaskDetails();" class="btn btn-primary pull-left">Save details</button>
+    </div>
+    <div class="pull-right m-r">
+        <button type="button" onclick="$('#tabApplicationTasks').click();" class="btn btn-warning">Application</button>
+    </div>
+</div>

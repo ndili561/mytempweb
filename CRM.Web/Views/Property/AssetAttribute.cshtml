@@ -1,0 +1,15 @@
+﻿@using CRM.Entity.Model.Asset
+@model AssetModel
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Asset Attributes</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var item in Model.AssetAttributes)
+        {
+            <div id="divAssetComponentElementAttribute_@item.Id">
+                @Html.Partial("_AssetAttribute", item)
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Model.Employee
+@model UserCalendarTaskDto
+@Styles.Render("~/Content/fullcalendar")
+@Styles.Render("~/Content/jQuery-File-Upload")
+@using (Html.BeginForm("UploadCalendar", "CalendarTask", FormMethod.Post, new { @id = "fileupload", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+{
+    <div id="page-content">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div class="panel">
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.Label("Employee:", new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(model => model.ContactId, Model.ContactSelectedList, new { @class = "form-control dropdown", onchange = "onContactIdChange()" })
+                            </div>
+                        </div>
+                        <hr />
+                        <div id="divCalendarTasks">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Task Type Lists</h3>
+                            </div>
+                            <p class="text-semibold">Please drag and drop the task below to calendar</p>
+                            <div id="divLogisticsCalendarEvents">
+                                @foreach (var task in Model.CalendarTasks)
+                                {
+                                    <div class="fc-event" data-id="@task.Id" data-class="@task.CssClassName.ToString().ToLower()">@task.Name</div>
+                                }
+                            </div>
+                            <hr />
+                            <button type="button" class="btn btn-labeled btn-success fa fa-save" id="saveCalendar" onclick="savecalendar($('#ContactId').val())">Save Calendar</button> 
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="col-md-9 pull-left">
+                            <h3 class="panel-title">Calendar</h3>
+                        </div>
+                        <div id="divCalendarAction" class="col-md-3 pull-right" style="display: none">
+                            <div class="col-md-4 text-semibold">
+                                <span class=" bg-purple pli-upload-to-cloud fileinput-button" style="cursor: pointer" title="Upload outlook calendar(ics) file.">
+                                    <input id="fileupload" type="file" name="files[]" multiple>
+                                </span>
+                            </div>
+                            <div class="col-md-4 pull-left">
+                                <span class=" bg-info pli-download-from-cloud" id="btnDownloadCalendar" style="cursor: pointer" onclick="downloadCalendar()" title="Download calendar">
+                                </span>
+                            </div>
+                            <div class="col-md-4 pull-left">
+                                <span class="bg-danger pli-office" id="btnEmailCalendar" style="cursor: pointer" onclick="emailCalendar()" title="Email calendar">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body" id='divCalendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divCalendarTaskParent", ChildDivId = "divCalendarTaskChild", Style = "z-index: auto;" })
+
+@section scripts {
+    @Html.PageScriptFile("Index.js")
+    @Scripts.Render("~/js/fullcalendar")
+    @Scripts.Render("~/js/fileupload")
+}

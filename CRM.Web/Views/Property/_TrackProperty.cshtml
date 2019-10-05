@@ -1,0 +1,24 @@
+﻿@using CRM.Entity.Settings
+@using Microsoft.Extensions.Options
+@model CRM.Entity.Model.Common.PropertyModel
+
+@inject IOptions<HttpClientSettings> HttpClientSettings
+@{
+    ViewData["Title"] = "Track Property";
+}
+<head>
+    <title>Track Property </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type='text/javascript' src="~/js/trackproperty.js"></script>
+    <script type='text/javascript' src='@HttpClientSettings.Value.BingMapUrl' async defer></script>
+    <script type='text/javascript'>
+            var property = { Code: "",  Latitude: "", Longitude: "" };
+            property.Longitude = @Model.Longitude;
+            property.Latitude = @Model.Latitude;
+            property.Code = '@Model.PROPERTY_CODE';
+    </script>
+</head>
+<body onload="GetMap();">
+    <div class="row" id='track-property'></div>
+</body>
+

@@ -1,0 +1,65 @@
+﻿@model CRM.Entity.Model.Asset.AssetComponentModel
+<div id="divAssetComponentElementAttribute_@Model.Id">
+    <form id="frmAssetComponentComponentElementAttribute">
+        @Html.HiddenFor(model => Model.AssetId, new { id = "AssetId", Name = "AssetId" })
+        @Html.HiddenFor(model => Model.ComponentElementId, new { id = "ComponentElementId", Name = "ComponentElementId" })
+        @Html.HiddenFor(model => Model.Id, new { id = "AssetComponentId", Name = "AssetComponentId" })
+        @Html.HiddenFor(model => Model.RowVersion, new { id = "AssetComponentRowVersion", Name = "AssetComponentRowVersion" })
+        @Html.HiddenFor(model => Model.Active)
+        <div class="col-lg-12">
+            <div class="panel ">
+                <h3 class="panel-title">
+                    @Model.ComponentElement.Name @if (!Model.Active)
+                    {
+                        <span class="label label-danger">Deactivated</span>
+                    }
+                </h3>
+                <div class="panel-body">
+                    <div class="row">
+                        @foreach (var attribute in Model.AssetComponentComponentElementAttributes)
+                        {
+                            var dataTypeId = attribute.ComponentElementAttribute.Attribute.AttributeDataTypeId;
+
+                            <div class="form-group col-md-6 col-xs-12" id="@attribute.Id">
+                                @Html.HiddenFor(model => attribute.Id, new { id = "Id", Name = "Id" })
+                                @Html.HiddenFor(model => Model.RowVersion, new { id = "RowVersion", Name = "RowVersion" })
+                                @Html.HiddenFor(model => attribute.AssetComponentId, new { id = "AssetComponentId", Name = "AssetComponentId" })
+                                @Html.HiddenFor(model => attribute.ComponentElementAttributeId, new { id = "ComponentElementAttributeId", Name = "ComponentElementAttributeId" })
+                                <label class="control-label">
+                                    @attribute.ComponentElementAttribute.Attribute.Name
+                                </label>
+
+                                <div class="input-group-@attribute.Id">
+                                    @switch (dataTypeId)
+                                    {
+                                        case 2:
+                                            @Html.TextBoxFor(model => attribute.ComponentElementAttributeValue, new { id = "ComponentElementAttributeValue", Name = "ComponentElementAttributeValue", type = "number", step = "any", @class = "form-control" })
+                                            break;
+                                        case 3:
+                                            <div class='input-group date datepicker'>
+                                                @Html.TextBoxFor(model => attribute.ComponentElementAttributeValue, new { id = "ComponentElementAttributeValue", Name = "ComponentElementAttributeValue", @class = "form-control" })
+                                                <span class="input-group-addon" style="padding:5px;">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            break;
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            @Html.DropDownListFor(model => attribute.ComponentElementAttributeValue, attribute.ComponentElementAttributeValueSelectList, new { id = "ComponentElementAttributeValue", Name = "ComponentElementAttributeValue", @class = "form-control", @style = "padding:5px;" })
+                                            break;
+                                        default:
+                                            @Html.TextBoxFor(model => attribute.ComponentElementAttributeValue, new { id = "ComponentElementAttributeValue", Name = "ComponentElementAttributeValue", @class = "form-control" })
+                                            break;
+                                    }
+
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

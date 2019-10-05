@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.7.0",
+    "animate.css": "3.6.1",
+    "toastr": "2.1.4",
+    "jquery": "3.3.1",
+    "jquery-validation": "1.17.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "bootstrap-datepicker": "1.4.1",
+    "metismenu": "2.7.4",
+    "pace-js": "1.0.2",
+    "gulp": "4.0.0",
+    "gulp-minify": "2.1.0",
+    "gulp-uglify": "3.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-clean-css": "3.9.3"
+  },
+  "dependencies": {
+    "fullcalendar": "^3.9.0",
+    "fullcalendar-scheduler": "^1.9.4",
+    "inspinia": "^2.6.5"
+  }
+}

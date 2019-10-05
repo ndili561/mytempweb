@@ -1,0 +1,207 @@
+﻿@model CRM.Entity.Search.Common.PropertyDocumentSearchModel
+@{
+    ViewData["Title"] = "Images";
+}
+<div id="divShowHideImage" style="display: none">
+    <button id="btnShowHideImage" class="btn btn-danger pull-left" type="button" onclick="hideImageDiv()"> Hide</button>
+    <div id="viewImage" class="row" style="max-height: 600px;overflow: scroll">
+    </div>
+</div>
+
+@using (Html.BeginForm("UploadImage", "Property", FormMethod.Post, new { @name = "frmPropertyImageUpload", id = "frmPropertyImageUpload", @enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div id="previews" class="dz-default dz-message box__input dropzone">
+            <div style="text-align: center">
+                <i class="fa fa-cloud-upload" style="font-size: 23px; position: relative; top: 4px;"></i>
+                <span style="margin-left: 20px">Drop files to attach or browse</span>
+            </div>
+        </div>
+        <div class="meter">
+            <span class="roller"></span>
+        </div>
+        <div id="previewFiles"></div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <input class="form-control m-b" type="number" min="0" max="10" id="ViewOrder" name="ViewOrder" value="" placeholder="Type view order">
+        </div>
+        <div class="col-md-2">
+            <label class="col-md-9 control-label pull-right" for="IsImageForPropertyShop">Is for Property shop?</label>
+            <div class="col-md-3">
+                <input class="form-control m-b" type="checkbox" id="IsImageForPropertyShop" name="IsImageForPropertyShop" value="">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label class="col-md-9 control-label pull-right" for="IsDefaultImage">Is Default Image?</label>
+            <div class="col-md-3">
+                <input class="form-control m-b" type="checkbox" id="IsDefaultImage" name="IsDefaultImage" value="">
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <input class="form-control m-b" type="text" id="Comment" name="Comment" value="" placeholder="Please type comment for document">
+        </div>
+        <div class="col-md-1 pull-right">
+            <input type="submit" id="sumbitPropertyImageUpload" name="Submit" class="btn btn-success pull-right  m-b" value="Save" />
+        </div>
+    </div>
+}
+<form asp-action="PropertyImageGrid" method="get" id="frmImageGrid">
+    <input type="hidden" asp-for="@Model.TargetGridId" />
+    <input type="hidden" asp-for="@Model.PropertyId" />
+    <input type="hidden" asp-for="@Model.DocumentTypeId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <search />
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("PropertyImageGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="ibox">
+    <div class="pull-left">
+        <button type="button" onclick="$('#tabComponent').click();" class="btn btn-primary">Component</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" onclick="$('#tabDocument').click();" class="btn btn-warning">Document</button>
+    </div>
+</div>
+<script src="~/extlibs/pdfjs/pdf.js"></script>
+<script type="text/javascript">
+    
+    $(function () {
+        initializeGrid();
+        $('#frmImageGrid .btn-filter').click();
+        initializeDropzone();
+    });
+
+    function initializeDropzone() {
+        $('#frmPropertyImageUpload').dropzone({
+            //parameter name value
+            paramName: "UploadedFile",
+            //clickable div id
+            clickable: '#previews',
+            //preview files container Id
+            previewsContainer: "#previewFiles",
+            autoProcessQueue: false,
+            //uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 100,
+            //  url:"/", // url here to save file
+            maxFilesize: 100, //max file size in MB,
+            addRemoveLinks: true,
+            dictResponseError: 'Server not Configured',
+            acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg", 
+            init: function () {
+                var self = this;
+                // config
+                self.options.addRemoveLinks = true;
+                self.options.dictRemoveFile = "Delete";
+                //New file added
+                self.on("addedfile",
+                    function (file) {
+                        //  alert('new file added ');
+                        console.log('new file added ', file);
+                        $('.dz-success-mark').hide();
+                        $('.dz-error-mark').hide();
+                    });
+                // Send file starts
+                self.on("sending",
+                    function (file, xhr, formData) {
+                        //alert('sending');
+                        formData.append('PropertyId', $('#PropertyId').val());
+                        formData.append('Comment', $('#Comment').val());
+                        formData.append('IsDefaultImage', $('#IsDefaultImage').val());
+                        formData.append('ViewOrder', $('#ViewOrder').val());
+                        formData.append('Name', file.name);
+                        formData.append('UploadedFile', file.UploadedFile);
+                        console.log('upload started', file);
+                        $('.meter').show();
+                    });
+
+                // File upload Progress
+                self.on("totaluploadprogress",
+                    function (progress) {
+                        // alert('progress start');
+                        console.log("progress ", progress);
+                        $('.roller').width(progress + '%');
+                        //alert('progress start');
+                    });
+
+                self.on("queuecomplete",
+                    function (progress) {
+                        // alert('queuecomplete');
+                        $('.meter').delay(999).slideUp(999);
+                    });
+
+                // On removing file
+                self.on("removedfile",
+                    function (file) {
+                        // alert('removedfile');
+                        console.log(file);
+                    });
+
+                $('#sumbitPropertyImageUpload').on("click",
+                    function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Validate form here if needed
+
+                        if (self.getQueuedFiles().length > 0) {
+                            self.processQueue();
+                            // alert('processQueue');
+
+                        } else {
+                            self.uploadFiles([]);
+                            $('#sumbitPropertyImageUpload').submit();
+                            //alert('successmultiple');
+                        }
+
+                    });
+
+
+                self.on("successmultiple",
+                    function (files, response) {
+                        alert('successmultiple');
+                        // Gets triggered when the files have successfully been sent.
+                        // Redirect user or notify of success.
+
+                    });
+            }
+        });
+    }
+
+    function hideImageDiv() {
+        $("#divShowHideImage").css("display", "none");
+    }
+  
+    function loadImage(id) {
+        sendRequestToServer("/Property/ViewImage", id);
+    }
+    function sendRequestToServer(url,id) {
+        $.ajax({
+            url: url,
+            data: { id: id },
+            type: "GET",
+            success: function (data) {
+                $("#viewImage").html(data);
+                $("#divShowHideImage").css("display", "block");
+            }
+        });
+    }
+</script>
+

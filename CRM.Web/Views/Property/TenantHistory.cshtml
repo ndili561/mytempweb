@@ -1,0 +1,68 @@
+﻿@model CRM.Entity.Search.Customer.TenantHistoryViewSearchModel
+@{
+    ViewData["Title"] = "Tanant History";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="PropertyCode" column-name="PropertyCode" /></th>
+                <th><sort display-name="TenancyReference" column-name="TenancyReference" /></th>
+                <th><sort display-name="Tenant Code" column-name="TenantCode" /></th>
+                <th><sort display-name="Tenancy Type" column-name="TenancyType" /></th>
+                <th><sort display-name="Tenancy Status" column-name="Tenancy Status" /></th>
+                <th><sort display-name="Tenancy StartDate" column-name="TenancyStartDate" /></th>
+                <th><sort display-name="Tenancy EndDate" column-name="TenancyEndDate" /></th>
+                <th><sort display-name="IsMainTenant" column-name="IsMainTenant" /></th>
+                <th><sort display-name="CurrentBalance" column-name="CurrentBalance" /></th>
+                <th><sort display-name="Rent Group" column-name="RentGroup" /></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TenantHistoryViewSearchResult)
+            {
+            <tr>
+
+                <td>
+                    @item.PropertyCode
+                </td>
+                <td>
+                    @item.TenancyReference
+                </td>
+                <td>
+                    @item.TenantCode
+                </td>
+                <td>
+                    @item.TenancyType
+                </td>
+                <td>
+                    @item.TenancyStatus
+                </td>
+                <td>
+                    @item.TenancyStartDate
+                </td>
+                <td>
+                    @item.TenancyEndDate
+                </td>
+                <td>
+                    @item.IsMainTenant
+                </td>
+                <td>
+                    @item.CurrentBalance
+                </td>
+                <td>
+                    @item.RentGroupDescription
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

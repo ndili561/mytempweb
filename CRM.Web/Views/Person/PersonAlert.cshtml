@@ -1,0 +1,16 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Customer
+@model PersonAlertSearchModel
+@{
+    ViewData["Title"] = "Person Alerts";
+}
+<form asp-action="PersonAlertGrid" method="GET">
+
+    <input type="hidden" asp-for="PersonId" />
+    <div id="@Model.TargetGridId" class="grid">
+        @Html.Partial("PersonAlertGrid", Model)
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAlertParent" })
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAlertCommentParent" })
+

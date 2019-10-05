@@ -1,0 +1,46 @@
+﻿@using CRM.Entity.Search.Customer
+@model PersonAntiSocialBehaviourSearchModel
+@{
+    ViewData["Title"] = "Person Alerts";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Forename" column-name="Person/Forename" /></th>
+                <th><sort display-name="Surname" column-name="Person/Surname" /></th>
+                <th><sort display-name="Completion Date" column-name="CompletionDate" /></th>
+                <th class="text-right"> <button type="button" id="btnAddPersonAntiSocialBehaviour" onclick="displayAddPersonAntiSocialBehaviour()" class="btn btn-success btn-labeled fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PersonAntiSocialBehaviourSearchResult)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.Forename)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompletionDate)
+                    </td>
+                    <td class="text-right">
+                       
+                        <button type="button" id="btnEditPerson_@item.Id" onclick="displayEditPersonAntiSocialBehaviour('@item.Id')" class="btn btn-warning btn-labeled fa fa-edit">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

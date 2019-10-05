@@ -1,0 +1,7 @@
+﻿@using CRM.Entity.Model.Customer
+@model List<PersonAddressDto>
+@foreach (var address in Model)
+{
+    @Html.Partial("_Address", address)
+}
+

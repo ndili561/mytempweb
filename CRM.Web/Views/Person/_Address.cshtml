@@ -1,0 +1,70 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonAddressDto
+<form id="frmPersonAddress" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="PersonId" />
+    <input type="hidden" asp-for="AddressId" />
+    <input type="hidden" asp-for="Address.Id" />
+    <input type="hidden" asp-for="AddressTypeId" />
+    <input type="hidden" asp-for="RowVersion" />
+    <input type="hidden" asp-for="Address.RowVersion" />
+
+    <div class="ibox-content">
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+        <div class="clearfix"></div>
+        <div class="form-group ">
+            <label asp-for="Address.AddressLine1" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address.AddressLine1" class="form-control m-b" />
+                <span asp-validation-for="Address.AddressLine1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="Address.AddressLine2" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address.AddressLine2" class="form-control m-b" />
+                <span asp-validation-for="Address.AddressLine2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="Address.AddressLine3" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address.AddressLine3" class="form-control m-b" />
+                <span asp-validation-for="Address.AddressLine3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="Address.AddressLine4" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address.AddressLine4" class="form-control m-b" />
+                <span asp-validation-for="Address.AddressLine4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address.PostCode" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address.PostCode" class="form-control m-b" />
+            </div>
+        </div>
+    </div>
+    <div id="divPersonAddressChangeLog" class="row">
+
+    </div>
+</form>
+
+<div class="row m-t">
+    <div class="col-md-3">
+        <button type="button" onclick="$('#tabContactDetail').click();" class="btn btn-primary pull-left">Contact By Detail</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="viewPersonAddressChangeLog(@Model.PersonId);" class="btn btn-info pull-right">Change Log</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="updatePersonAddress();" class="btn btn-success pull-right">Save</button>
+    </div>
+    <div class="col-md-3 ">
+        <button type="button" onclick="$('#tabAntiSocialBehaviour').click();" class="btn btn-warning pull-right">Anti Social Behaviour</button>
+    </div>
+</div>
+

@@ -1,0 +1,415 @@
+﻿
+@model CRM.Entity.Model.Common.PropertyDetailViewDto
+@if (Model == null)
+{
+    <p> No details available.</p>
+}
+else
+{
+
+
+    <div class="row">
+    <div class="eq-height">
+
+    <div class="col-md-4 pad-rgt eq-box-md">
+        <div class="panel panel-mint">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-home"></i> <span>
+                        Property Details - <span class="text-bold">
+                            @Html.DisplayFor(model => model.AddressLine1)
+                        </span>
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row pad-btm">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            <span class="text-mint"> @Html.DisplayFor(model => model.Address)<br/></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PropertyType, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.PropertyType)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Bedrooms, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Bedrooms)
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Rent, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                @Html.DisplayFor(model => model.Rent)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ServiceCharges, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                @Html.DisplayFor(model => model.ServiceCharges)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TotalCharges, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                @Html.DisplayFor(model => model.TotalCharges)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RentFrequency, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                @Html.DisplayFor(model => model.RentFrequency)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Landlord, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Landlord)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AgeRestriction, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.formattedAgeRestriction)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Pets, new {@class = "control-label col-md-6  text-right"})
+                        <div class="col-md-6">
+                            <yesnoimage value="@Model.Pets"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.WheelchairAdapted, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6 text-mint">
+                                <yesnoimage value="@Model.WheelchairAdapted"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RampedAccess, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                <yesnoimage value="@Model.RampedAccess"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StepInShower, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                <yesnoimage value="@Model.StepInShower"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.WalkInShower, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                <yesnoimage value="@Model.WalkInShower"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Stairlift, new {@class = "control-label col-md-6  text-right"})
+                            <div class="col-md-6">
+                                <yesnoimage value="@Model.Stairlift"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 pad-lft eq-box-md">
+    <div class="panel panel-mint">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <i class="fa fa-clipboard"></i> <span>NHO Inspection</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+    <div class="col-md-4 pad-rgt">
+        <div class="well well-sm" style="min-height: 300px;">
+            <h3>External</h3>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Driveway, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Driveway"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Parking, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Parking"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumberOfSteps, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.NumberOfSteps)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bin, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Bin"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Garden, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Garden"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FloorLevel, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.FloorLevel)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DoorEntry, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.DoorEntry"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Lift, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Lift"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CommunalEntrance, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.CommunalEntrance"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HighRise, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.HighRise"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4 pad-hor">
+        <div class="well well-sm" style="min-height: 300px;">
+            <h3 class="">Internal</h3>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WasherSpace, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.WasherSpace"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DryerSpace, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.DryerSpace"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CommunalLaundry, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.CommunalLaundry"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumberOfBathrooms, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.NumberOfBathrooms)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumberOfReceptionRooms, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.NumberOfReceptionRooms)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BathroomType, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.BathroomType)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SeparateWC, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.SeparateWC"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WCType, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.WCType)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4 pad-lft">
+        <div class="well well-sm" style="min-height: 300px;">
+            <h3>Services</h3>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Furnished, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Furnished"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Concierge, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Concierge"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Trustcare, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        <yesnoimage value="@Model.Trustcare"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GasMeterType, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.GasMeterType)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GasMeterLocation, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.GasMeterLocation)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GasSupplier, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.GasSupplier)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ElectricMeterType, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.ElectricMeterType)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ElectricMeterLocation, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.ElectricMeterLocation)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ElectricSupplier, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.ElectricSupplier)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OtherAdaptations, new {@class = "control-label col-md-6  text-right"})
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.OtherAdaptations)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+}

@@ -1,0 +1,66 @@
+﻿@model CRM.Entity.Search.Customer.TenantSearchModel
+@{
+    ViewData["Title"] = "Tenant";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-3">
+                    Property Code
+                </th>
+                <th class="col-lg-2">
+                    Tenant Code
+                </th>
+                <th class="col-lg-2">
+                    Tenancy Type
+                </th>
+                <th class="col-lg-2">
+                    Tenancy Reference
+                </th>
+                <th class="col-lg-1">
+                    Forename
+                </th>
+                <th class="col-lg-1">
+                    Surname
+                </th>
+                <th class="col-lg-1">
+                    Date Of Birth
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.TenantSearchResult.Any())
+            {
+                foreach (var item in Model.TenantSearchResult)
+                {
+                    <tr>
+                        <td >
+                            <div class="col-md-6">
+                                <a class="btn btn-warning" href="/Property/Details?propertyCode=@Model.PropertyCode&personId=@Model.PersonId"> @item.Property?.PropertyCode</a>
+                            </div>
+                          
+                            <div  class="col-md-6">
+                                <button type="button" class="btn btn-info fa fa fa-info" onclick="loadTenantHistory('@item.TenantCode')">
+                                    Tenancy History
+                                </button>
+                            </div>
+                        </td>
+                        <td>@item.TenantCode</td>
+                        <td>@item.TenancyType</td>
+                        <td>@item.TenancyReference</td>
+                        <td>@item.Person?.Forename</td>
+                        <td>@item.Person?.Surname</td>
+                        <td>@item.Person?.DateOfBirthString</td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <div style="display: none" id="collapsableTenantHistoryDiv_@item.TenantCode">
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonAlertDto
+<form id="frmPersonAlert" class="form-horizontal" role="form" asp-controller="PersonAlert" asp-action="Save" >
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="form-group m-b">
+        <label asp-for="Person.Forename" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Forename" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Person.Surname" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Surname" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-t">
+        <label asp-for="AlertGroupId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="AlertGroupId" asp-items="@Model.AlertGroupSelectList" class="form-control dropdown"></select>
+            <span asp-validation-for="AlertGroupId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group m-t">
+        <label asp-for="AlertTypeId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="AlertTypeId" asp-items="@Model.AlertTypeSelectList" class="form-control dropdown"></select>
+            <span asp-validation-for="AlertTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Details" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <textarea asp-for="Details" class="form-control"></textarea>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#frmPersonAlert").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

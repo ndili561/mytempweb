@@ -1,0 +1,5 @@
+﻿@using CRM.Entity.Model.Employee
+@model UserDto
+<div id="divApplicationRole" class="form-group ">
+    <select asp-for="LinkedUserApplicationRoleIds" asp-items="@Model.RoleSelectList" class="form-control dual_select" multiple="multiple" name="LinkedUserApplicationRoleIds"></select>
+</div>

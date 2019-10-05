@@ -1,0 +1,89 @@
+@model CRM.Entity.Model.Common.DeliveryRouteDto
+
+<div class="form-group">
+    @Html.LabelFor(model => model.StartLocation, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.StartLocation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.StartLocation)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.FinalDestination, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.FinalDestination, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FinalDestination)
+    </div>
+</div>
+<div class="hr-line-dashed"></div>
+<div class="hr-line-dashed"></div>
+
+<div id="divViaLocation">
+    @{ int ctr = 0; string mapText = "A";}
+    @foreach (var item in Model.ViaLocations)
+    {
+
+        switch (ctr)
+        {
+            case 0:
+                mapText = "B";
+                break;
+            case 1:
+                mapText = "C";
+                break;
+            case 2:
+                mapText = "D";
+                break;
+            case 3:
+                mapText = "E";
+                break;
+            case 4:
+                mapText = "F";
+                break;
+            case 5:
+                mapText = "G";
+                break;
+            case 6:
+                mapText = "H";
+                break;
+            case 7:
+                mapText = "I";
+                break;
+            case 8:
+                mapText = "J";
+                break;
+            case 9:
+                mapText = "K";
+                break;
+            default:
+                mapText = "A";
+                break;
+
+        }
+        <div class="form-group">
+            <div class="col-md-3 control-label">
+                @Html.Label("VIA_" + @mapText)
+            </div>
+            <div class="col-md-1">
+                <span class="pull-left text-danger fa fa-remove" id="spanVIA_@mapText" onclick="removeViaRoute(@ctr)"></span>
+            </div>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => item, new { @id = "VIA_" + mapText, @class = "form-control", @placeholder = "Please type atleast 5 character of the address" })
+            </div>
+        </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed"></div>
+        ctr++;
+    }
+</div>
+
+<div class="form-group">
+    <button id="addViaRoute" onclick="addViaRoute()" type="button" class="btn btn-info btn-labeled pad-lft fa fa-plus" title="Add more VIA Route">
+        Add VIA Route
+    </button>
+    <button id="btnRecalculateRoute" onclick="getDirections()" type="button" class="btn btn-warning btn-labeled pad-lft fa fa-adjust" title="Recalculate Route">
+        Recalculate Route
+    </button>
+    <button id="btnSaveRoute" onclick="confirmSaveRoute()" type="button" class="btn btn-success btn-labeled pad-lft fa fa-save" title="Recalculate Route">
+        Save Route
+    </button>
+</div>

@@ -1,0 +1,55 @@
+﻿@model CRM.Entity.Search.Common.PropertyDetailViewSearchModel
+@{
+    ViewData["Title"] = "Property";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Property Code" column-name="PropertyCode" /></th>
+                <th><sort display-name="Property Type" column-name="PropertyType" /></th>
+                <th>Address</th>
+                <th><sort display-name="Current Main Tenant" column-name="CurrentMainTenant" /></th>
+                <th><sort display-name="Rent(pw)" column-name="Rent" /></th>
+                <th><sort display-name="Bedrooms" column-name="Bedrooms" /></th>
+                <th><sort display-name="Area" column-name="Area" /></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PropertyDetailViewSearchResult)
+            {
+            <tr>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.PropertyCode</a>
+                </td>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.PropertyType</a>
+                </td>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.Address</a>
+                </td>
+                <td>
+                    <a class="text-danger text-bold" href="~/Person/Details?personId=@item.PersonId">@item.CurrentMainTenant</a>
+                </td>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.Rent</a>
+                </td>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.Bedrooms</a>
+                </td>
+                <td>
+                    <a href="~/Property/Details?propertyCode=@item.PropertyCode">@item.Area</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

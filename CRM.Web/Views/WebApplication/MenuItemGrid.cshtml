@@ -1,0 +1,42 @@
+﻿@model CRM.Entity.Search.Employee.MenuItemSearchModel
+@{
+    ViewData["Title"] = "Menu Item";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Controller" column-name="ControllerName" /></th>
+                <th><sort display-name="Name" column-name="DisplayName" /></th>
+                <th><sort display-name="Description" column-name="DisplayName" /></th>
+                <th class="text-right"> <button type="button" id="btnAddMenuItem" onclick="displayAddMenuItem()" class="btn btn-success btn-labeled fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MenuItemSearchResult)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControllerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <button type="button" id="btnEditMenuItem" onclick="displayEditMenuItem(@item.Id)" class="btn btn-primary btn-labeled fa fa-edit pull-right">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

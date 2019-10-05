@@ -1,0 +1,424 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Welcome User</h5>
+                    <small>You have 2 messages and 4 notifications.</small>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <ul class="list-group clear-list m-t">
+                        <li class="list-group-item fist-item">
+                            <span class="pull-right">
+                                09:00 pm
+                            </span>
+                            <span class="label label-success">1</span> Please contact me
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right">
+                                10:16 am
+                            </span>
+                            <span class="label label-info">2</span> Sign a contract
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right">
+                                08:22 pm
+                            </span>
+                            <span class="label label-primary">3</span> Open new shop
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right">
+                                11:06 pm
+                            </span>
+                            <span class="label label-default">4</span> Call back to Sylvia
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right">
+                                12:00 am
+                            </span>
+                            <span class="label label-primary">5</span> Write a letter to Sandra
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="col-md-4">
+                        <h5>Test Web Server and API</h5>&nbsp;&nbsp;
+                        <small>Please click the button and verify the requst response.</small>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btn-info" href="/Test/Index">GET </a>
+                        <form asp-action="PostDataFromWebServer" method="POST" asp-controller="Home" >
+                            <input type="hidden" name="message" id="message" value="The requst is from browser" />
+                            <button type="submit" class="btn btn-warning">POST</button>
+                        </form>
+
+                        <button class="btn btn-danger" type="button" onclick="postDataToServer()">Ajax POST </button>
+                        <button class="btn btn-success" type="button" onclick="getDataFromServer()">Ajax GET </button>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ibox-content">
+                    <div id="divTitle">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Small todo list</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <ul class="todo-list m-t small-list">
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                            <span class="m-l-xs todo-completed">Buy a milk</span>
+
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                            <span class="m-l-xs">Go to shop and find some products.</span>
+
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                            <span class="m-l-xs">Send documents to Mike</span>
+                            <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                            <span class="m-l-xs">Go to the doctor dr Smith</span>
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                            <span class="m-l-xs todo-completed">Plan vacation</span>
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                            <span class="m-l-xs">Create new stuff</span>
+                        </li>
+                        <li>
+                            <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                            <span class="m-l-xs">Call to Anna for dinner</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Your daily feed</h5>
+                    <div class="ibox-tools">
+                        <span class="label label-warning-light">10 Messages</span>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <div class="feed-activity-list">
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/profile.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">5m ago</small>
+                                    <strong>Monica Smith</strong> posted a new blog. <br>
+                                    <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+
+                                </div>
+                            </div>
+
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/a2.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">2h ago</small>
+                                    <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                    <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/a3.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">2h ago</small>
+                                    <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">2 days ago at 8:30am</small>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/a4.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right text-navy">5h ago</small>
+                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                    <div class="actions">
+                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                        <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/a5.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">2h ago</small>
+                                    <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                    <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                    <div class="well">
+                                        Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                    </div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/profile.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">23h ago</small>
+                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <a href="@Url.Action("Profile", "User")" class="pull-left">
+                                    <img alt="image" class="img-circle" src="~/Images/a7.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">46h ago</small>
+                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Alpha project</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content ibox-heading">
+                    <h3>You have meeting today!</h3>
+                    <small><i class="fa fa-map-marker"></i> Meeting is on 6:00am. Check your schedule to see detail.</small>
+                </div>
+                <div class="ibox-content inspinia-timeline">
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-briefcase"></i>
+                                6:00 am
+                                <br />
+                                <small class="text-navy">2 hour ago</small>
+                            </div>
+                            <div class="col-xs-7 content no-top-border">
+                                <p class="m-b-xs">
+                                    <strong>Meeting</strong>
+                                </p>
+
+                                <p>
+                                    Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the
+                                    sale.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-file-text"></i>
+                                7:00 am
+                                <br />
+                                <small class="text-navy">3 hour ago</small>
+                            </div>
+                            <div class="col-xs-7 content">
+                                <p class="m-b-xs">
+                                    <strong>Send documents to Mike</strong>
+                                </p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-coffee"></i>
+                                8:00 am
+                                <br />
+                            </div>
+                            <div class="col-xs-7 content">
+                                <p class="m-b-xs">
+                                    <strong>Coffee Break</strong>
+                                </p>
+                                <p>
+                                    Go to shop and find some products.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-phone"></i>
+                                11:00 am
+                                <br />
+                                <small class="text-navy">21 hour ago</small>
+                            </div>
+                            <div class="col-xs-7 content">
+                                <p class="m-b-xs">
+                                    <strong>Phone with Jeronimo</strong>
+                                </p>
+                                <p>
+                                    Lorem Ipsum has been the industry's standard dummy text ever since.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-user-md"></i>
+                                09:00 pm
+                                <br />
+                                <small>21 hour ago</small>
+                            </div>
+                            <div class="col-xs-7 content">
+                                <p class="m-b-xs">
+                                    <strong>Go to the doctor dr Smith</strong>
+                                </p>
+                                <p>
+                                    Find some issue and go to doctor.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
+                                <i class="fa fa-comments"></i>
+                                12:50 pm
+                                <br />
+                                <small class="text-navy">48 hour ago</small>
+                            </div>
+                            <div class="col-xs-7 content">
+                                <p class="m-b-xs">
+                                    <strong>Chat with Monica and Sandra</strong>
+                                </p>
+                                <p>
+                                    Web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var checkServer;
+        var waitingTime = 1000;
+        function postDataToServer() {
+            $('#divTitle').html('Waiting for POST...');
+
+            checkServer = setTimeout(function () {
+                var url = '/Home/AjaxPostData';
+                callAjaxRequest('POST', url);
+            }, waitingTime);
+        };
+        function getDataFromServer() {
+            $('#divTitle').html('Waiting for GET...');
+            checkServer = setTimeout(function () {
+                var url = '/Home/AjaxGetData';
+                callAjaxRequest('GET', url);
+            }, waitingTime);
+        };
+        function callAjaxRequest(type, url) {
+
+            $.ajax({
+                cache: false,
+                type: type,
+                url: url,
+                success: function (result) { $('#divTitle').html(result); }
+            });
+
+        };
+    </script>
+}
+

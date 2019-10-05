@@ -1,0 +1,181 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Database\EntityAudit\**" />
+    <EmbeddedResource Remove="Database\EntityAudit\**" />
+    <None Remove="Database\EntityAudit\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Database\Entities\Common\Repair.cs" />
+    <Compile Remove="Database\Entities\Common\RepairLine.cs" />
+    <Compile Remove="IUnitOfWork.cs" />
+    <Compile Remove="Migrations\20180320094228_InitialCreate.cs" />
+    <Compile Remove="UnitOfWork.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Migrations\20180302105733_EnableTemporalTable.cs~RF9be3f38.TMP" />
+    <None Remove="Migrations\20180625133247_InitialCreate.cs~RF19fc5e97.TMP" />
+    <None Remove="Migrations\DefaultData\000-ClearData.sql" />
+    <None Remove="Migrations\DefaultData\001-Ethnicities.sql" />
+    <None Remove="Migrations\DefaultData\002-Genders.sql" />
+    <None Remove="Migrations\DefaultData\002-Titles.sql" />
+    <None Remove="Migrations\DefaultData\003-ApplicantType.sql" />
+    <None Remove="Migrations\DefaultData\003-ContactType.sql" />
+    <None Remove="Migrations\DefaultData\003-Languages.sql" />
+    <None Remove="Migrations\DefaultData\004-NationalityTypes.sql" />
+    <None Remove="Migrations\DefaultData\004-Relationships.sql" />
+    <None Remove="Migrations\DefaultData\005-Application.sql" />
+    <None Remove="Migrations\DefaultData\006-Roles.sql" />
+    <None Remove="Migrations\DefaultData\007-ApplicationRoles.sql" />
+    <None Remove="Migrations\DefaultData\009-MenuItems.sql" />
+    <None Remove="Migrations\DefaultData\010-Permissions.sql" />
+    <None Remove="Migrations\DefaultData\011-Users.sql" />
+    <None Remove="Migrations\DefaultData\012-Person.sql" />
+    <None Remove="Migrations\DefaultData\012-Property.sql" />
+    <None Remove="Migrations\DefaultData\012-Tenant.sql" />
+    <None Remove="Migrations\DefaultData\013-PersonVblLink.sql" />
+    <None Remove="Migrations\DefaultData\014-AddressType.sql" />
+    <None Remove="Migrations\DefaultData\015-Address.sql" />
+    <None Remove="Migrations\DefaultData\016-ContactByOptions.sql" />
+    <None Remove="Migrations\DefaultData\017-PersonContactDetails.sql" />
+    <None Remove="Migrations\DefaultData\020-PersonAddress.sql" />
+    <None Remove="Migrations\DefaultData\025-DocumentType.sql" />
+    <None Remove="Migrations\DefaultData\030-Email.sql" />
+    <None Remove="Migrations\DefaultData\035-TaskType.sql" />
+    <None Remove="Migrations\DefaultData\040-Task.sql" />
+    <None Remove="Migrations\DefaultData\045-TaskStatus.sql" />
+    <None Remove="Migrations\DefaultData\050-AntiSocialBehaviour.sql" />
+    <None Remove="Migrations\DefaultData\055-PersonAntiSocialBehaviour.sql" />
+    <None Remove="Migrations\DefaultData\060-AlertGroupAndType.sql" />
+    <None Remove="Migrations\DefaultData\065-ImageGroup.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Migrations\DefaultData\002-Titles.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\000-ClearData.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\001-Ethnicities.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\003-ApplicantType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\003-ContactType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\004-Relationships.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\060-AlertGroupAndType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\065-ImageGroup.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\055-PersonAntiSocialBehaviour.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\012-Property.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\012-Tenant.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\016-ContactByOptions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\017-PersonContactDetails.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\050-AntiSocialBehaviour.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\045-TaskStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\035-TaskType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\040-Task.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\030-Email.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\025-DocumentType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\014-AddressType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\020-PersonAddress.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\015-Address.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\013-PersonVblLink.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\012-Person.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\011-Users.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\010-Permissions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\009-MenuItems.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\007-ApplicationRoles.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\006-Roles.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\005-Application.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\004-NationalityTypes.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\003-Languages.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Migrations\DefaultData\002-Genders.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.0-beta2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="obj\" />
+    <Folder Include="SQL changes\" />
+  </ItemGroup>
+
+</Project>

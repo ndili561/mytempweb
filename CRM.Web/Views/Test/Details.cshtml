@@ -1,0 +1,399 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Model.Customer
+@using CRM.Entity.Settings
+@using Microsoft.Extensions.Options
+@model PersonDto
+
+@inject IOptions<WebApplicationSettings> WebApplicationSettings
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RowVersion)
+<div class="ibox-title" style="height: 65px">
+    <div class="col-md-2">
+        <label class="text-danger">Go to Application(s):</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.ApplicationId > 0)
+        {
+            <div class="col-md-4 border-left-right">
+                <button type="button" class="btn btn-primary m-r-lg" onclick="displayVblApp(@Model.VblContactId)">VBL</button>
+                <span>Status </span><label class="text-success m-l m-r">@Model.VblApplication.ApplicationStatus.Name</label>
+            </div>
+
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.PeropertyCode))
+        {
+            <div class="col-md-4 border-left-right">
+                <button type="button" class="btn btn-warning m-r-lg" onclick="displayVoidApp('@Model.PeropertyCode')">Void</button>
+            </div>
+
+        }
+        @if (Model.AssetId > 0)
+        {
+            <div class="col-md-4 border-left-right">
+                <button type="button" class="btn btn-danger m-r-lg" onclick="displayAssetApp(@Model.AssetId)">Asset</button>
+            </div>
+
+        }
+
+    </div>
+
+    <div class="col-md-4">
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </div>
+
+</div>
+<div class="ibox-content">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" id="tabViewDetails" href="#tab-ViewDetails">View Details</a></li>
+            <li class=""><a data-toggle="tab" id="tabDetails" href="#tab-Details">Details</a></li>
+            <li class=""><a data-toggle="tab" id="tabContactDetail" href="#tab-ContactDetail" onclick="loadContactDetail(@Model.Id)">Contact Details</a></li>
+            <li class=""><a data-toggle="tab" id="tabContactAddress" href="#tab-ContactAddress" onclick="loadContactAddress(@Model.Id)">Address</a></li>
+            <li class=""><a data-toggle="tab" id="tabAntiSocialBehaviour" href="#tab-AntiSocialBehaviour" onclick="loadAntiSocialbehaviour(@Model.Id)">Anti Social Behaviour</a></li>
+            <li class=""><a data-toggle="tab" id="tabTenantDetail" href="#tab-TenantDetail" onclick="loadTenantDetail(@Model.Id,'@Model.TenantCode')">Tenant Detail</a></li>
+            <li class=""><a data-toggle="tab" id="tabHouseholdMember" href="#tab-HouseholdMember" onclick="loadHouseholdMember(@Model.Id,@Model.MainContactPersonId)">Household Member</a></li>
+            <li class=""><a data-toggle="tab" id="tabCalendar" href="#tab-Calendar" onclick="loadCalendar(@Model.Id)">Calendar</a></li>
+            <li class=""><a data-toggle="tab" id="tabDocument" href="#tab-Document" onclick="loadDocument(@Model.Id)">Documents</a></li>
+            <li class=""><a data-toggle="tab" id="tabEmail" href="#tab-Email" onclick="loadEmail(@Model.Id)">Emails</a></li>
+            <li class=""><a data-toggle="tab" id="tabSms" href="#tab-Sms" onclick="loadSms(@Model.Id)">SMS</a></li>
+            <li class=""><a data-toggle="tab" id="tabChangeLog" href="#tab-ChangeLog" onclick="loadChangeLog(@Model.Id)">Change Log</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-ViewDetails" class="tab-pane active">
+                <div class="panel-body" id="viewDetails">
+                    @Html.Partial("_ViewDetails", Model)
+                </div>
+            </div>
+            <div id="tab-Details" class="tab-pane">
+                <div class="panel-body" id="personDetails">
+                    @Html.Partial("_Details", Model)
+                </div>
+            </div>
+            <div id="tab-ContactDetail" class="tab-pane">
+                <div class="panel-body" id="divPersonContactDetail">
+                </div>
+            </div>
+            <div id="tab-ContactAddress" class="tab-pane">
+                <div class="panel-body" id="divPersonContactAddress">
+                </div>
+            </div>
+            <div id="tab-AntiSocialBehaviour" class="tab-pane">
+                <div class="panel-body" id="divAntiSocialBehaviour">
+                </div>
+            </div>
+            <div id="tab-TenantDetail" class="tab-pane">
+                <div class="panel-body" id="divTenantDetail">
+                </div>
+            </div>
+            <div id="tab-HouseholdMember" class="tab-pane">
+                <div class="panel-body" id="divHouseholdMember">
+                </div>
+            </div>
+            <div id="tab-Calendar" class="tab-pane">
+                <div class="panel-body" id="divPersonCalendar">
+                </div>
+            </div>
+
+            <div id="tab-Document" class="tab-pane">
+                <div class="panel-body" id="divPersonDocument">
+                </div>
+            </div>
+            <div id="tab-Email" class="tab-pane">
+                <div class="panel-body" id="divPersonEmail">
+                </div>
+            </div>
+            <div id="tab-Sms" class="tab-pane">
+                <div class="panel-body" id="divPersonSms">
+                </div>
+            </div>
+            <div id="tab-ChangeLog" class="tab-pane">
+                <div class="panel-body" id="divPersonChangeLog">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonParent" })
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAlertParent" })
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonFlagParent" })
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonCaseParent" })
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.input-group.date').datepicker({
+                autoclose: true,
+                startView: 2,
+                forceParse: false,
+                format: 'dd/mm/yyyy'
+
+            });
+            $('.scroll_content').slimscroll({
+                height: '200px'
+            });
+            $("#frmPersonFlag").submit(function (event) {
+                submitModalForm($(this), event);
+            });
+
+            loadAlert(@Model.Id);
+            loadFlag(@Model.Id);
+            loadCase(@Model.Id);
+        });
+
+        function displayEditPersonFlag(id) {
+            var url = "/PersonFlag/Edit?id=" + id;
+            showDialog("divPersonFlagParent", "frmPersonFlag", url, "Edit Person Flag");
+        }
+        function displayAddPersonFlag(id) {
+            var url = "/PersonFlag/Create?personId=" + id;
+            showDialog("divPersonFlagParent", "frmPersonFlag", url, "Create Person Flag");
+        }
+
+        function displayEditPersonAlert(id) {
+
+            var url = "/PersonAlert/Edit?id=" + id;
+            showDialog("divPersonAlertParent", "frmPersonAlert", url, "Edit Person Alert");
+        }
+        function displayAddPersonAlert(id) {
+            var url = "/PersonAlert/Create?personId=" + id;
+            showDialog("divPersonAlertParent", "frmPersonAlert", url, "Create Person Alert");
+        }
+        function displayEditPersonCase(id) {
+            var url = "/PersonCase/Edit?id=" + id;
+            showDialog("divPersonCaseCase", "frmPersonCase", url, "Edit Person Case");
+        }
+        function displayCreatePersonCase(personId) {
+            var url = "/PersonCase/Create?personId=" + personId;
+            showDialog("divPersonCaseParent", "frmPersonCase", url, "Create Person Case");
+        }
+        function loadHouseholdMember(personId, mainContactPersonId) {
+            var data = { PersonId: personId, MainContactPersonId: mainContactPersonId}
+            getDataFromServer('/Person/HouseholdMember', data, "#divHouseholdMember");
+        }
+        function loadTenantDetail(personId,tenantCode) {
+            if (tenantCode) {
+                var data = {PersonId:personId, TenantCode: tenantCode}
+                getDataFromServer('/Person/Tenant', data, "#divTenantDetail");
+            }
+        }
+        function loadTenantHistory(tenantCode) {
+            var data = { TenantCode: tenantCode }
+            var divElementId = '#collapsableTenantHistoryDiv_' + tenantCode;
+            if ($(divElementId).css('display') == 'none') {
+                getDataFromServer('/Person/TenantHistory', data, divElementId);
+                $(divElementId).css('display', 'block');
+            } else {
+                $(divElementId).css('display', 'none');
+            }
+
+        }
+        function loadAntiSocialbehaviour(personId) {
+            if (personId) {
+                var data = { personId: personId}
+                getDataFromServer('/Person/PersonAntiSocialBehaviour', data, "#divAntiSocialBehaviour");
+            }
+        }
+        function loadAlert(personId) {
+            if (personId) {
+                var data = { PersonId: personId }
+                getDataFromServer('/Person/PersonAlert', data, "#divAlert");
+            }
+        }
+        function loadFlag(personId) {
+            if (personId) {
+                var data = { PersonId: personId }
+                getDataFromServer('/Person/PersonFlag', data, "#divFlag");
+            }
+        }
+        function loadCase(personId) {
+            if (personId) {
+                var data = { PersonId: personId }
+                getDataFromServer('/Person/PersonCase', data, "#divCase");
+            }
+        }
+
+        function loadContactAddress(personId) {
+            var data = { personId: personId}
+            getDataFromServer('/Person/ContactAddress', data, "#divPersonContactAddress");
+        }
+
+        function loadContactDetail(personId) {
+            var data = { personId: personId}
+            getDataFromServer('/Person/ContactDetail', data, "#divPersonContactDetail");
+        }
+
+        function loadChangeLog(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/ChangeLog', data, "#divPersonChangeLog");
+        }
+
+        function loadAntiSocialBehaviour(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/AntiSocialBehaviour', data, "#divAntiSocialBehaviour");
+        }
+
+        function loadDocument(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/Document', data, "#divPersonDocument");
+        }
+
+        function loadEmail(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/Email', data, "#divPersonEmail");
+        }
+
+        function loadSms(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/Sms', data, "#divPersonSms");
+        }
+
+        function composeSms(personId) {
+            var data = { PersonId: personId}
+            getDataFromServer('/Person/ComposeSms', data, "#divComposeSms");
+        }
+
+        function getDataFromServer(url, data, divId) {
+
+            $.ajax({
+                url: url,
+                headers: {
+                    'X-CSRF-Token': $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                type: "GET",
+                data: data,
+                success: function(result) {
+                    $(divId).html(result);
+                }
+            });
+        }
+
+        function displayVoidApp(propertyCode) {
+            var url = "@WebApplicationSettings.Value.CloudVoidsUrl" + "/Property/Details?propertyCode='" + propertyCode+"'";
+            window.open(url);
+        }
+
+        function displayVblApp(contactId) {
+            var url = "@WebApplicationSettings.Value.VblUrl" + "Contact/Edit?contactId=" + contactId;
+            window.open(url);
+        }
+        function displayAssetApp(assetId) {
+            var url = "@WebApplicationSettings.Value.AssetUrl" + "/Asset/ViewAsset?assetId=" + assetId;
+            window.open(url);
+        }
+        function updatePersonDetails() {
+            var url = "/Person/Save";
+            var form = $("#frmPersonDetails");
+            var model = objectifyForm(form.serializeArray());
+            model.RowVersion = $("#RowVersion").val();
+            postDataToServer(url, model, "#divPersonDetails");
+        }
+
+        function updatePersonContactDetails() {
+            var url = "/Person/SavePersonContactDetails";
+            var form = $("#frmPersonContactDetails");
+            var model = objectifyForm(form.serializeArray());
+            //todo: Get error message to show
+            //console.log(model);
+            //debugger;
+            //for (var ctr = 0; ctr <= 7; ctr++) {
+            //    var currentKeyValue;
+            //    var isSelectedValue;
+            //    var commentValue;
+            //    var optionId;
+            //    $.each(model,
+            //        function(key, value) {
+            //            var currentKey = "PersonContactDetails[" + ctr + "].ContactValue";
+
+            //            var isSelected = "PersonContactDetails[" + ctr + "].IsSelected";
+            //            var isComment = "PersonContactDetails[" + ctr + "].Comment";
+            //            var isId = "PersonContactDetails[" + ctr + "].ContactByOptionId";
+
+            //            if (key == currentKey) {
+            //                console.log('value:' + value);
+            //                currentKeyValue = value;
+            //            } else {
+            //                if (key == isSelected) {
+            //                    console.log('selected:' + value);
+            //                    isSelectedValue = value;
+            //                } else {
+            //                    if (key == isComment) {
+            //                        console.log('comment:' + value);
+            //                        commentValue = value;
+            //                    } else {
+            //                        if (key == isId ) {
+            //                            console.log('id:' + value);
+            //                            optionId = value;
+            //                        }
+            //                    }
+            //                }
+            //            }
+
+
+            //        });
+            //    if ((isSelectedValue == "true" &&  !currentKeyValue ) || (isSelectedValue != "true" && currentKeyValue )) {
+            //        if (optionId != 5) {
+            //            debugger;
+            //            var stringdiv = "value_" + ctr;
+            //            console.log("yep there's an error!");
+            //            $(stringdiv).addClass('has-error');
+            //            $(stringdiv).addMessage("The contact value must exist when the checkbox is selected or contact value must be empty when it is not selected.");
+            //        }
+
+            //    }
+            //}
+            model.RowVersion = $("#RowVersion").val();
+            postDataToServer(url, model, "#divPersonContactDetail");
+
+        }
+
+        function acknowledge(rowId) {
+            //debugger;
+            $("#" + "row" + rowId).removeClass();
+            $("#" + "alert" + rowId).removeClass();
+            $("#" + "acknowledgedbutton" + rowId).addClass("disabled");
+        }
+
+
+
+        function updatePersonAddress() {
+            var url = "/PersonAddress/Save";
+            var form = $("#frmPersonAddress");
+            var model = objectifyForm(form.serializeArray());
+            postDataToServer(url, model, "#divPersonAddress");
+        }
+        function displayCreatePerson(mainContactPersonId) {
+            var url = "/Person/Create?mainContactPersonId=" + mainContactPersonId;
+            var title = "Create Person";
+            if (mainContactPersonId > 0) {
+                title = "Add Household Member";
+            }
+            showDialog("divPersonParent", "frmPerson", url, title );
+        }
+        function postDataToServer(url, model, divId) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: {
+                    'X-CSRF-Token': $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                data: model,
+                success: function(result) {
+                    if (result.message) {
+                        if (!result.success) {
+                            displayErrorMessage(result.message);
+                        } else {
+                            displaySuccessMessage(result.message);
+                        }
+
+                    } else {
+                        $(divId).html(result);
+                    }
+                }
+            });
+        }
+    </script>
+
+}
+

@@ -1,0 +1,73 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonDto
+<form id="frmPersonContactDetails" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="RowVersion" />
+    <input type="hidden" asp-for="Id" />
+    <div class="panel-body">
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+        <div class="clearfix"></div>
+        @for (int ctr = 0; ctr < Model.PersonContactDetails.Count; ctr++)
+        {
+            @Html.HiddenFor(x => Model.PersonContactDetails[ctr].Id)
+            @Html.HiddenFor(x => Model.PersonContactDetails[ctr].PersonId)
+            @Html.HiddenFor(x => Model.PersonContactDetails[ctr].RowVersion)
+            @Html.HiddenFor(x => Model.PersonContactDetails[ctr].ContactByOptionId)
+            <div id="div_@ctr" class="form-group">
+                <div class="col-md-2">
+                    @Html.CheckBoxFor(i => i.PersonContactDetails[ctr].IsSelected, true)
+                </div>
+                <div class="col-md-2 control-label">
+                    <label for="@string.Format("ContactBys_{0}__IsSelected", ctr)" style="font-weight: bold">
+                        @Html.DisplayFor(x => Model.PersonContactDetails[ctr].ContactByOption.Name, new { @class = "form-control" })
+                    </label>
+                </div>
+                @if (string.Equals("3rd Party", Model.PersonContactDetails[ctr].ContactByOption.Name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    <div id="comment_@ctr" class="col-md-4">
+                        @Html.TextBoxFor(x => Model.PersonContactDetails[ctr].Comment, new { @class = "form-control", @Name = "ContactByText_" + ctr, placeholder = "Name" })
+                        @Html.ValidationMessageFor(x => Model.PersonContactDetails[ctr].Comment)
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4">
+                    </div>
+                }
+                @if (string.Equals("Mail", Model.PersonContactDetails[ctr].ContactByOption.Name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    <div id="value_@ctr" class="col-md-4">
+
+                    </div>
+                }
+                else
+                {
+                    <div id="value_@ctr" class="col-md-4">
+                        @Html.TextBoxFor(x => Model.PersonContactDetails[ctr].ContactValue, new { @class = "form-control", @Name = "ContactByValue_" + ctr })
+                        @Html.ValidationMessageFor(x => Model.PersonContactDetails[ctr].ContactValue)
+                    </div>
+                }
+
+            </div>
+        }
+        <div id="divPersonContactByChangeLog">
+
+        </div>
+    </div>
+</form>
+<div class="row m-t">
+    <div class="col-md-3">
+        <button type="button" onclick="$('#tabDetails').click();" class="btn btn-primary pull-left">Details</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="viewPersonContactByChangeLog(@Model.Id);" class="btn btn-info pull-right">Change Log</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="updatePersonContactDetails();" class="btn btn-success pull-right">Save</button>
+    </div>
+    <div class="col-md-3 ">
+        <button type="button" onclick="$('#tabContactAddress').click();" class="btn btn-warning pull-right">Address</button>
+    </div>
+</div>
+
+

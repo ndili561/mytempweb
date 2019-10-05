@@ -1,0 +1,41 @@
+﻿@model CRM.Entity.Model.Lookup.AddressTypeDto
+<form id="editAddressType" class="form-horizontal" role="form" asp-controller="AddressType" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <label asp-for="SortOrder" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsActive" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editAddressType").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

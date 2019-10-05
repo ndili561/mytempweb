@@ -1,0 +1,41 @@
+﻿@using CRM.Entity.Model.Employee
+@model RoleDto
+<form id="editRole" class="form-horizontal" role="form" asp-controller="ApplicationRole" asp-action="Save" data-ajax="true" data-ajax-complete="handleEthnicityUpdate" data-ajax-success="handleEthnicityUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group m-b">
+            <label asp-for="RoleName" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="RoleDescription" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="RoleDescription" class="form-control" />
+                <span asp-validation-for="RoleDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="IsActive" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input  asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editRole").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

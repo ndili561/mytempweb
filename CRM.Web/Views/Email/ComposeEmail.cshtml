@@ -1,0 +1,220 @@
+﻿@model CRM.Entity.Model.Common.EmailDto
+@{
+    ViewData["Title"] = "ComposeEmail";
+    var title = "Compose mail";
+    if (Model.Person != null)
+    {
+        title += " for " + Model.Person.Forename + " " + Model.Person.Surname;
+    }
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.Partial("_Category", Model)
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="@Url.Action("Inbox", "Email")" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                </div>
+                <h2>
+                   @title 
+                </h2>
+            </div>
+            <form asp-action="SendEmail" method="POST" id="frmSendEmail" enctype="multipart/form-data">
+                
+                <div class="mail-box">
+                    <div class="mail-body">
+                        <div class="text-right m-b">
+                            <div class="btn-group">
+                                <button id="btnCCToggle" data-toggle="button" type="button" class="btn btn-sm btn-default">Cc</button>
+                                <button id="btnBCCToggle" data-toggle="button" type="button" class="btn btn-sm btn-default">Bcc</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ToEmailAddress" class="col-md-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="ToEmailAddress" class="form-control  m-b"/>
+                                <span asp-validation-for="ToEmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div id="divCCEmail" class="hide form-group">
+                            <label asp-for="CcEmailAddress" class="col-md-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="CcEmailAddress" class="form-control  m-b"/>
+                                <span asp-validation-for="CcEmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div id="divBCCEmail" class="hide form-group">
+                            <label asp-for="BccEmailAddress" class="col-md-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="BccEmailAddress" class="form-control  m-b"/>
+                                <span asp-validation-for="BccEmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Subject" class="col-md-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Subject" class="form-control  m-b"/>
+                                <span asp-validation-for="Subject" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailCategoryId" class="col-md-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <select asp-for="EmailCategoryId" asp-items="@Model.EmailCategorySelectListItems" class="form-control chosen-select" tabindex="4"></select>
+                                <span asp-validation-for="EmailCategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailLabelTypeIds" class="col-md-3 control-label m-t"></label>
+                            <div class="col-sm-9 m-t">
+                                <select asp-for="EmailLabelTypeIds" asp-items="@Model.EmailLabelTypeSelectListItems" multiple="multiple" class="form-control chosen-select" tabindex="5"></select>
+                                <span asp-validation-for="EmailCategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FileAttachment" class="btn btn-primary control-label">
+                                <input asp-for="FileAttachment" multiple  type="file" name="file" class="hide">
+                                Attach
+                            </label>
+                            <label class="control-label text-info" id="lblAttachedFileNames">
+
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="mail-text h-200">
+                        <div class="summernote">
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="mail-body text-right tooltip-demo">
+                        <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+        var fileAttachedInEmails = [];
+        var removeLink = "<a id='removeFileName' onclick='removeAttachedFile(this);' class='fa fa-remove text-danger m-r' style='padding: 0px 10px 0px 10px'></a>";
+        $(document).ready(function () {
+            $('.summernote').summernote();
+            $(".chosen-select").select2();
+            var $inputImage = $("#FileAttachment");
+            if (window.FileReader) {
+                $inputImage.change(function () {
+                    var fileReader = new FileReader(),
+                        files = this.files,
+                        file;
+
+                    if (!files.length) {
+                        return;
+                    }
+                    file = files[0];
+                    fileAttachedInEmails.push(file);
+                    updateAttachedFile();
+                    //if (/^image\/\w+$/.test(file.type)) {
+                    //    fileReader.readAsDataURL(file);
+                    //    fileReader.onload = function () {
+                    //        $inputImage.val("");
+                    //        $image.cropper("reset", true).cropper("replace", this.result);
+                    //    };
+                    //} else {
+                    //    showMessage("Please choose an image file.");
+                    //}
+                });
+            } else {
+                $inputImage.addClass("hide");
+            }
+            $("#frmSendEmail").submit(function (event) {
+                submitEmail($(this), event);
+            });
+        });
+        function updateAttachedFile() {
+            $("#lblAttachedFileNames").empty();
+            for (i = 0; i < fileAttachedInEmails.length; i++) {
+                var file = fileAttachedInEmails[i];
+                var link = removeLink.replace("removeFileName", file.name);
+                $("#lblAttachedFileNames").append(file.name + '(' + Math.trunc(file.size / (1024)) + ' KB)' + link);
+            }
+        }
+        function removeAttachedFile(element) {
+            var fileName = $(element).attr("id");
+            $.each(fileAttachedInEmails, function (idx, elm) {
+                if (elm && elm.name === fileName) {
+                    fileAttachedInEmails.splice(idx, 1);
+                }
+            });
+            updateAttachedFile();
+        }
+
+        // =================================================================
+        $('#btnCCToggle').on('click', function () {
+            $('#divCCEmail').toggleClass('hide');
+        });
+
+        // Show The BCC Input Field
+        // =================================================================
+        $('#btnBCCToggle').on('click', function () {
+            $('#divBCCEmail').toggleClass('hide');
+        });
+
+        function submitEmail(form, event) {
+            event.preventDefault();
+            var files = fileAttachedInEmails;
+            if (files.length > 0) {
+                var model = objectifyForm(form.serializeArray());
+                var data = new FormData();
+                data.append('__RequestVerificationToken', model.__RequestVerificationToken);
+                for (var i = 0; i < files.length; i++) {
+                    data.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/Email/UploadAttachment",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        submitEmailAfterAttachment(form, result);
+                    },
+                    error: function() {
+                        alert("There was error uploading files!");
+                    }
+                });
+            } else {
+                submitEmailAfterAttachment();
+            }
+          
+
+        }
+        function submitEmailAfterAttachment(form,ajaxResult) {
+            var model = objectifyForm(form.serializeArray());
+            model.AttachmentFilePaths = ajaxResult.uploadedFilePath;
+            model.Subject = $('.note-editable').html();
+            $.ajax({
+                url: $(form).attr('action'),
+                type: "POST",
+                data: model,
+                success: function (result) {
+                    if (result.message) {
+                        displaySuccessMessage(result.message);
+                    } else {
+                        $(".modal-body").html(result);
+                    }
+                }
+            });
+        }
+    </script>
+}

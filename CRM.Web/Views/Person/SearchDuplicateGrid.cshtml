@@ -1,0 +1,43 @@
+﻿@model CRM.Entity.Search.Employee.AuditSearchModel
+@{
+    ViewData["Title"] = "Person Change Log";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th><sort display-name="Audit Details" column-name="OldValues" /></th>
+            <th><sort display-name="DateTime" column-name="DateTime"/></th>
+            <th><sort display-name="Event" column-name="EventType"/></th>
+            <th><sort display-name="User" column-name="UserName"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.AuditSearchResult)
+        {
+            <tr>
+
+                <td>
+                    <audit model="@item" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Name)
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="tc" colspan="12">
+                <pageing />
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

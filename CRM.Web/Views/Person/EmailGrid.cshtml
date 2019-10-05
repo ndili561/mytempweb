@@ -1,0 +1,40 @@
+﻿@using CRM.Entity.Search.Customer
+@model PersonEmailSearchModel
+@{
+    ViewData["Title"] = "Emails";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Subject" column-name="Subject" /></th>
+                <th><sort display-name="CreatedOn" column-name="Created On" /></th>
+                <th><sort display-name="Comment" column-name="Comment" /></th>
+                <th class="pull-right"><button class="btn btn-primary" type="button" onclick="composeEmail()">Compose</button></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.PersonEmailSearchResult)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email.ToEmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="tc" colspan="12">
+                <pageing/>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

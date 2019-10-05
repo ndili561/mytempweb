@@ -1,0 +1,128 @@
+﻿@using CRM.Entity.Model.Employee
+@model WebApplicationDto
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RowVersion)
+<p>
+    <span class="font-bold">@Model.Name</span>
+    <span class="text-danger">@Model.ErrorMessage</span>
+    <span>@Html.ValidationSummary(true)</span>
+</p>
+<div class="ibox-content" style="border-style:none">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-Roles" onclick="loadRole(@Model.Id)">Roles</a></li>
+            <li class=""><a data-toggle="tab" href="#tab-MenuItem" onclick="loadMenuItem(@Model.Id)">Menu Item</a></li>
+            <li style="display:none" id="tabMenuPermission"><a id="lnkMenuPermission" data-toggle="tab" href="#tab-Permissions">Permissions</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-Roles" class="tab-pane active">
+                <div class="panel-body" id="divApplicationRole">
+
+                </div>
+            </div>
+
+            <div id="tab-MenuItem" class="tab-pane">
+                <div class="panel-body" id="divMenuItem">
+
+                </div>
+            </div>
+
+            <div id="tab-Permissions" class="tab-pane">
+                <div class="panel-body" id="divRolePermission">
+                    <strong>Permissions</strong>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(function() {
+            loadRole($("#Id").val());
+        });
+
+        function loadRole(applicationId) {
+            var url = '/WebApplication/Role';
+            var data = { applicationId: applicationId };
+            raiseAjaxCall(url, data, "#divApplicationRole");
+            $("#tabMenuPermission").css("display", "none");
+        }
+
+        function loadMenuItem(applicationId) {
+            var url = '/WebApplication/MenuItem';
+            var data = { applicationId: applicationId };
+            raiseAjaxCall(url, data, "#divMenuItem");
+            $("#tabMenuPermission").css("display", "none");
+        }
+
+        function loadPermission(roleId) {
+            var url = '/WebApplication/Permission';
+            var data = { applicationId: $("#Id").val(), roleId: roleId };
+            raiseAjaxCall(url, data, "#divRolePermission");
+            $("#tabMenuPermission").css("display", "block");
+            $("#lnkMenuPermission").click();
+        }
+
+        function refreshReadonlyRolePermissions() {
+            var applicationId = $("#Id").val();
+            var roleId = $("#RoleId").val();
+            var fullaccessIds = JSON.stringify($("#LinkedFullAccessRolePermissionsIds").val());
+            var readonlyaccessIds = JSON.stringify($("#LinkedReadonlyRolePermissionsIds").val());
+            var url = '/WebApplication/RefreshReadonlyRolePermissions';
+            var data = { applicationId: applicationId, roleId: roleId, fullaccessIds: fullaccessIds, readonlyaccessIds: readonlyaccessIds };
+            raiseAjaxCall(url, data, "#divReadonlyRolePermissions");
+        }
+
+        function refreshFullAccessRolePermissions() {
+            var applicationId = $("#Id").val();
+            var roleId = $("#RoleId").val();
+            var fullaccessIds = JSON.stringify($("#LinkedFullAccessRolePermissionsIds").val());
+            var readonlyaccessIds = JSON.stringify($("#LinkedReadonlyRolePermissionsIds").val());
+            var url = '/WebApplication/RefreshFullAccessRolePermissions';
+            var data = { applicationId: applicationId, roleId: roleId, fullaccessIds: fullaccessIds, readonlyaccessIds: readonlyaccessIds };
+            raiseAjaxCall(url, data, "#divFullAccessRolePermissions");
+
+        }
+
+        function updateRolePermission() {
+            var url = "/WebApplication/SavePermission";
+            var form = $("#frmRolePermissions");
+            var model = objectifyForm(form.serializeArray());
+            model.LinkedFullAccessRolePermissionsIds = $("#LinkedFullAccessRolePermissionsIds").val();
+            model.LinkedReadonlyRolePermissionsIds = $("#LinkedReadonlyRolePermissionsIds").val();
+            postDataToServer(url, model);
+        }
+
+        function raiseAjaxCall(url, data, divId) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: data,
+                success: function(result) {
+                    $(divId).html(result);
+                }
+            });
+        }
+        function postDataToServer(url, model) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data:  model,
+                success: function (result) {
+                    if (result.message) {
+                        if (!result.success) {
+                            displayErrorMessage(result.message);  
+                        } else {
+                            displaySuccessMessage(result.message);  
+                        }
+                       
+                    } else {
+                        $("#personDetails").html(result);
+                    }
+                }
+            });
+        }
+    </script>
+}

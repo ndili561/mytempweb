@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Incommunities.Gateway.Entity": {
+      "commandName": "Executable"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+﻿@model CRM.Entity.Model.Common.EmailDto
+@if (Model.Attachments.Any())
+{
+    <div class="mail-attachment">
+        <p>
+            <span><i class="fa fa-paperclip"></i> @Model.Attachments.Count attachments - </span>
+            <a onclick="downloadAllAttachments(@Model.Id)">Download all</a>
+            <a onclick="viewAllAttachments(@Model.Id)">View all images</a>
+        </p>
+        
+        <div class="attachment">
+            @foreach (var attachment in @Model.Attachments)
+            {
+                <div class="file-box">
+                    <div class="file">
+                        <a onclick="downloadAttachment(@attachment.Id)">
+                            <span class="corner"></span>
+                            @Html.Partial("_Image",attachment)
+                        </a>
+                    </div>
+
+                </div>
+            }
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿@model CRM.Entity.Search.Common.EmailSearchModel
+@{
+    ViewData["Title"] = "Email";
+}
+<input type="hidden" asp-for="TargetGridId" />
+
+<table class="table table-hover table-mail">
+    <tbody>
+        @foreach (var item in Model.EmailSearchResult)
+        {
+
+            <tr class="@item.ReadCss">
+                <td class="check-mail">
+                    <input type="checkbox" class="i-checks">
+                </td>
+                <td class="mail-ontact"><a href="@Url.Action("EmailView", "Email",new{id=item.Id})">@item.User?.Name</a></td>
+                <td class="mail-subject">
+                    <a href="@Url.Action("EmailView", "Email", new {id = item.Id})">@item.Subject</a>
+                    @if (@item.EmailCategory != null)
+                    {
+                        <span class="label label-warning pull-right">@item.EmailCategory.Name</span>
+                    }
+                </td>
+                <td class="">
+                    @if (item.HasAttachment)
+                    {
+                        <i class="fa fa-paperclip"></i>
+                    }
+                </td>
+                <td class="text-right mail-date"><a href="@Url.Action("EmailView", "Email",new{id=item.Id})">@item.SendOn</a></td>
+            </tr>
+
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="tc" colspan="12">
+                <pageing />
+            </td>
+        </tr>
+    </tfoot>
+</table>

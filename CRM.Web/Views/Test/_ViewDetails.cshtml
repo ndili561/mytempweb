@@ -1,0 +1,164 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonDto
+
+<div id="frmViewDetails" class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title center-block">
+                    <h5>Person Details</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-6 b-r" id="divPersonDetails">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="text-right">Name</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="text-left">@Model.Forename @Model.Surname</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="text-right">Date Of Birth</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="text-left">@Model.DateOfBirthString</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="text-right">Address</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    @if (Model.PersonAddresses.Count != 0)
+                                    {
+                                        <span class="text-left">@Model.PersonAddresses.First().Address.AddressHtml</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="text-right">Contact Details:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    @if (@Model.PersonContactDetails.Count > 0)
+                                    {
+                                        foreach (var contactDetail in @Model.PersonContactDetails.OrderBy(x => x.ContactByOptionId))
+                                        {
+                                            <div class="row">
+                                                <span class="col-sm-6 text-left">@contactDetail.ContactValue</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <label class="text-right">Preferred Contact Time</label>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="text-left">@Model.PreferredContactTime</span>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="text-right">Preferred Language</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="text-left">@Model.Language</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6" >
+            <div class="ibox float-e-margins">
+                <div class="ibox-title center-block">
+                    <h5>Alert</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div id="divAlert">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title center-block">
+                    <h5>Flag</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div id="divFlag">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title center-block">
+                    <h5>Communication History</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row ">
+                        <div class="form-group">
+                            <label for="txtCallDetail" class="col-sm-1 control-label">Log Call</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="txtCallDetail" placeholder="Details of the call..."></textarea>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" class="btn btn-success fa fa-phone">Save</button>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <div id="divCase" class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

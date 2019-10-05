@@ -1,0 +1,85 @@
+﻿@using CRM.Entity.Helper
+@model CRM.Entity.Model.Employee.UserPersonTaskDto
+
+<form id="frmCreateUserTask" class="form-horizontal" role="form" asp-controller="Calendar" asp-action="CreateUserTask" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group m-b">
+            <label asp-for="TaskTypeId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="TaskTypeId" asp-items="@Model.TaskTypeList" class="form-control dropdown m-b"></select>
+                <span asp-validation-for="TaskTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="UserId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="UserId" asp-items="@Model.EmployeeList" class="form-control dropdown m-b"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="PersonId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="PersonId" type="text" placeholder="Type few character..." class="typeahead form-control" />
+                <span asp-validation-for="PersonId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            @Html.LabelFor(model => Model.ScheduleStartDate, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => Model.ScheduleStartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datetime", @style = "height:30px" })
+                @Html.ValidationMessageFor(model => Model.ScheduleStartDate)
+            </div>
+        </div>
+        <div class="form-group m-b">
+            @Html.LabelFor(model => Model.ScheduleStartTimeString, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.ScheduleStartTimeString, SelectedListHelper.GetTimeIntervalForCalendar(Model.ScheduleStartTimeString), new { @class = "form-control dropdown" })
+                @Html.ValidationMessageFor(model => Model.ScheduleStartTimeString)
+            </div>
+        </div>
+        <div class="form-group m-b">
+            @Html.LabelFor(model => Model.ScheduleEndDate, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => Model.ScheduleEndDate, "{0:dd/MM/yyyy}", new { @class = "form-control datetime", @style = "height:30px" })
+                @Html.ValidationMessageFor(model => Model.ScheduleEndDate)
+            </div>
+        </div>
+        <div class="form-group m-b">
+            @Html.LabelFor(model => Model.ScheduleEndTimeString, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.ScheduleEndTimeString, SelectedListHelper.GetTimeIntervalForCalendar(Model.ScheduleEndTimeString), new { @class = "form-control dropdown" })
+                @Html.ValidationMessageFor(model => Model.ScheduleEndTimeString)
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Description" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Description" type="text" placeholder="description..." class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Comment" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Comment" type="text" placeholder="notes..." class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#frmCreateUserTask").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+        initializeTypeahedPersonSearch();
+    });
+</script>

@@ -1,0 +1,17 @@
+﻿@using CRM.Entity.Model.Employee
+@model TaskDto
+<form id="frmApplicationTask" class="wizard-big">
+    
+    @Html.HiddenFor(model => model.Id)
+    <input type="hidden" asp-for="UpdateLinkedApplication" value="true" />
+    @Html.HiddenFor(model => model.RowVersion)
+    <select asp-for="LinkedApplicationTaskIds" asp-items="@Model.ApplicationSelectList" class="form-control dual_select" multiple="multiple" name="LinkedTaskApplicationIds"></select>
+</form>
+<div class="ibox m-t">
+    <div class="pull-left m-l">
+        <button type="button" onclick="updateApplicationTasks();" class="btn btn-primary pull-left m-l">Update links</button>
+    </div>
+    <div class="pull-right m-r">
+        <button type="button" onclick="$('#tabChangeLog').click();" class="btn btn-warning">Change Log</button>
+    </div>
+</div>

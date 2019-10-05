@@ -1,0 +1,16 @@
+﻿@using CRM.Entity.Model.Employee
+@model UserDto
+<form id="frmUserApplication" class="wizard-big">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    <select asp-for="LinkedUserApplicationIds" asp-items="@Model.ApplicationSelectList" class="form-control dual_select" multiple="multiple" name="LinkedUserApplicationIds"></select>
+</form>
+<div class="ibox m-t">
+    <div class="pull-left m-l">
+        <button type="button" onclick="updateUserApplications();" class="btn btn-primary pull-left m-l">Update application</button>
+    </div>
+    <div class="pull-right m-r">
+        <button type="button" onclick="$('#divUserRoles').click();" class="btn btn-warning">Roles</button>
+    </div>
+</div>  

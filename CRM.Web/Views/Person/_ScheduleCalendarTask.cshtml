@@ -1,0 +1,8 @@
+﻿@using Newtonsoft.Json
+@model object
+<div class="panel-body" id='divLogisticsSchedule'></div>
+<script type="text/javascript">
+    model = @Html.Raw(JsonConvert.SerializeObject(Model));
+    contacts = model.Data.contacts;
+    tasks = model.Data.tasks;
+</script>

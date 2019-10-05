@@ -1,0 +1,170 @@
+﻿@using CRM.Entity.Model.Employee
+@model UserDto
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RowVersion)
+<p>
+    <span class="text-danger">@Model.ErrorMessage</span>
+    <span>@Html.ValidationSummary(true)</span>
+</p>
+<div class="ibox-content" style="border-style:none">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" id="tabDetails" href="#tab-Details">Details</a></li>
+            <li class=""><a data-toggle="tab" id="tabUserApplications" href="#tab-Applications" onclick="loadUserApplications(@Model.Id)">Applications</a></li>
+            <li class=""><a data-toggle="tab" id="tabUserRole" href="#tab-Roles" onclick="loadUserRoles(@Model.Id)">Roles</a></li>
+            <li class=""><a data-toggle="tab" id="tabCalendar" href="#tab-Calendar" onclick="loadCalendar(@Model.Id)">Calendar</a></li>
+            <li class=""><a data-toggle="tab" id="tabDocument" href="#tab-Document" onclick="loadDocument(@Model.Id)">Documents</a></li>
+            <li class=""><a data-toggle="tab" id="tabEmail" href="#tab-Email" onclick="loadEmail(@Model.Id)">Emails</a></li>
+            <li class=""><a data-toggle="tab" id="tabSms" href="#tab-Sms" onclick="loadSms(@Model.Id)">SMS</a></li>
+            <li class=""><a data-toggle="tab" id="tabChangeLog" href="#tab-ChangeLog" onclick="loadChangeLog(@Model.Id)">Change Log</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-Details" class="tab-pane active">
+                <div class="panel-body" id="personDetails">
+                    @Html.Partial("_Details", Model)
+                </div>
+            </div>
+            <div id="tab-Applications" class="tab-pane">
+                <div class="panel-body" id="divUserApplications">
+                </div>
+            </div>
+            <div id="tab-Roles" class="tab-pane">
+                <div class="panel-body" id="divUserRoles">
+                </div>
+            </div>
+
+            <div id="tab-Calendar" class="tab-pane">
+                <div class="panel-body" id="divUserCalendar">
+                </div>
+            </div>
+
+            <div id="tab-Document" class="tab-pane">
+                <div class="panel-body" id="divUserDocument">
+                </div>
+            </div>
+            <div id="tab-Email" class="tab-pane">
+                <div class="panel-body" id="divUserEmail">
+                </div>
+            </div>
+            <div id="tab-Sms" class="tab-pane">
+                <div class="panel-body" id="divUserSms">
+                </div>
+            </div>
+            <div id="tab-ChangeLog" class="tab-pane">
+                <div class="panel-body" id="divUserChangeLog">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var dualListbox;
+        $(document).ready(function () {
+            $('.input-group.date').datepicker({
+                autoclose: true,
+                startView: 2,
+                forceParse: false,
+                format: 'dd/mm/yyyy'
+      
+            });
+        });
+        function loadUserApplications(userId) {
+            getDataFromServer('/User/UserApplications', userId, "#divUserApplications");
+        }
+        function loadUserRoles(userId) {
+            getDataFromServer('/User/UserRoles', userId, "#divUserRoles");
+
+        }
+        function loadChangeLog(userId) {
+            getDataFromServer('/User/ChangeLog', userId, "#divUserChangeLog");
+        }
+        function loadDocument(userId) {
+            getDataFromServer('/User/Document', userId, "#divUserDocument");
+        }
+        function loadEmail(userId) {
+            getDataFromServer('/User/Email', userId, "#divUserEmail");
+        }
+        function loadSms(userId) {
+            getDataFromServer('/User/Sms', userId, "#divUserSms");
+        }
+        function composeSms(userId) {
+            getDataFromServer('/User/ComposeSms', userId, "#divComposeSms"); 
+        }
+
+        function getDataFromServer(url, userId, divId) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { userId: userId },
+                success: function (result) {
+                    $(divId).html(result);
+                    initializeDualListbox();
+                    linkedApplicationValueChange();
+                }
+            });
+        }
+        function initializeDualListbox() {
+            dualListbox = $('.dual_select').bootstrapDualListbox({
+                selectorMinimalHeight: 160
+            });
+        }
+        function updateUserDetails() {
+            var url = "/User/Save";
+            var form = $("#frmUserDetails");
+            var model = objectifyForm(form.serializeArray());
+            postDataToServer(url, model);
+        }
+
+        function updateUserApplications() {
+            var url = "/User/SaveUserApplications";
+            var form = $("#frmUserApplication");
+            var model = objectifyForm(form.serializeArray());
+            model.LinkedUserApplicationIds = $("#LinkedUserApplicationIds").val();
+            postDataToServer(url, model);
+        }
+        function updateUserApplicationRoles() {
+            var url = "/User/SaveUserApplicationRoles";
+            var form = $("#frmUserApplicationRole");
+            var model = objectifyForm(form.serializeArray());
+            model.LinkedUserApplicationRoleIds = $("#LinkedUserApplicationRoleIds").val();
+            postDataToServer(url, model);
+        }
+
+        function linkedApplicationValueChange() {
+            var applicationId = $("#LinkedApplicationIds").val();
+            var userId = $("#Id").val();
+            $.ajax({
+                url: "/User/GetApplicationRoles",
+                type: "GET",
+                data: { applicationId: applicationId, userId: userId },
+                success: function (result) {
+                    $("#divApplicationRole").replaceWith(result);
+                    initializeDualListbox();
+                }
+            }); 
+        }
+        function postDataToServer(url, model) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data:  model,
+                success: function (result) {
+                    if (result.message) {
+                        if (!result.success) {
+                            displayErrorMessage(result.message);  
+                        } else {
+                            displaySuccessMessage(result.message);  
+                        }
+                       
+                    } else {
+                        $("#personDetails").html(result);
+                    }
+                }
+            });
+        }
+    </script>
+
+}

@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{47F8102D-362C-4D19-8F74-60676E684232}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.DAL", "CRM.DAL\CRM.DAL.csproj", "{F4E89330-05B6-4A17-85BD-0B8F11C79600}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Dto", "CRM.Dto\CRM.Dto.csproj", "{25CDA4C9-9807-43E2-8280-03F89DAA1DED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.WebAPI", "CRM.WebAPI\CRM.WebAPI.csproj", "{07C43416-77BE-4C49-A951-AFBAA4CA3DFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.WebAPI.Tests", "CRM.WebAPI.Tests\CRM.WebAPI.Tests.csproj", "{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentApi.HttpClient", "DocumentApi.HttpClient\DocumentApi.HttpClient.csproj", "{22F0C66E-0378-471F-AB47-74254F0B7D9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4E89330-05B6-4A17-85BD-0B8F11C79600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E89330-05B6-4A17-85BD-0B8F11C79600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E89330-05B6-4A17-85BD-0B8F11C79600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E89330-05B6-4A17-85BD-0B8F11C79600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25CDA4C9-9807-43E2-8280-03F89DAA1DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25CDA4C9-9807-43E2-8280-03F89DAA1DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25CDA4C9-9807-43E2-8280-03F89DAA1DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25CDA4C9-9807-43E2-8280-03F89DAA1DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C43416-77BE-4C49-A951-AFBAA4CA3DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C43416-77BE-4C49-A951-AFBAA4CA3DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C43416-77BE-4C49-A951-AFBAA4CA3DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C43416-77BE-4C49-A951-AFBAA4CA3DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F0C66E-0378-471F-AB47-74254F0B7D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F0C66E-0378-471F-AB47-74254F0B7D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F0C66E-0378-471F-AB47-74254F0B7D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F0C66E-0378-471F-AB47-74254F0B7D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E00A629B-FD2C-49F1-BBD2-0BFBCF960FD4} = {47F8102D-362C-4D19-8F74-60676E684232}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3180651D-D04A-4E2B-AF13-FFDAF58261C6}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://incommunities.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CRM.DAL\\CRM.DAL.csproj
+		SccProjectName1 = CRM.DAL
+		SccLocalPath1 = CRM.DAL
+		SccProjectUniqueName2 = CRM.Dto\\CRM.Dto.csproj
+		SccProjectName2 = CRM.Dto
+		SccLocalPath2 = CRM.Dto
+		SccProjectUniqueName3 = CRM.WebAPI\\CRM.WebAPI.csproj
+		SccProjectName3 = CRM.WebAPI
+		SccLocalPath3 = CRM.WebAPI
+		SccProjectUniqueName4 = CRM.WebAPI.Tests\\CRM.WebAPI.Tests.csproj
+		SccProjectTopLevelParentUniqueName4 = CRM.API.sln
+		SccProjectName4 = CRM.WebAPI.Tests
+		SccLocalPath4 = CRM.WebAPI.Tests
+		SccProjectUniqueName5 = DocumentApi.HttpClient\\DocumentApi.HttpClient.csproj
+		SccProjectName5 = DocumentApi.HttpClient
+		SccLocalPath5 = DocumentApi.HttpClient
+	EndGlobalSection
+EndGlobal

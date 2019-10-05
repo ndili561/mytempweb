@@ -1,0 +1,9 @@
+﻿@model CRM.Entity.Model.Common.FileMetadata
+    @{
+        var imageBase64 = Convert.ToBase64String(Model.FileContent);
+        var imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+    }
+<div id="image" class="col-md-12">
+    <img src="@imageSrc" alt="@Model.AlternateText" />
+</div>
+

@@ -1,0 +1,76 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Customer
+@model PersonAntiSocialBehaviourSearchModel
+@{
+    ViewData["Title"] = "Person Anti Social Behaviours";
+}
+<form asp-action="PersonAntiSocialBehaviourGrid" method="GET">
+    
+    <input type="hidden" asp-for="PersonId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("PersonAntiSocialBehaviourGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAntiSocialBehaviourParent" })
+
+<script type="text/javascript">
+    function displayEditPersonAntiSocialBehaviourCase(caseId) {
+        var url = "/PersonAntiSocialBehaviour/Edit?id=" + caseId;
+        showDialog("divPersonAntiSocialBehaviourParent", "frmPersonAntiSocialBehaviour", url, "Add Case");
+    }
+    function displayAddPersonAntiSocialBehaviourCase(personId) {
+        var url = "/PersonAntiSocialBehaviour/Create?personId=" + personId;
+        showDialog("divPersonAntiSocialBehaviourParent", "frmPersonAntiSocialBehaviour", url, "Add Case");
+    }
+    function displayEditPersonAntiSocialBehaviourCaseNote(id) {
+        var url = "/PersonAntiSocialBehaviourCaseNote/Edit?id=" + id;
+        showDialog("divPersonAntiSocialBehaviourParent", "frmPersonAntiSocialBehaviour", url, "Edit Case Note");
+    }
+    function displayAddPersonAntiSocialBehaviourCaseNote(personAntiSocialBehaviourId) {
+        var url = "/PersonAntiSocialBehaviourCaseNote/Create?personAntiSocialBehaviourId=" + personAntiSocialBehaviourId;
+        showDialog("divPersonAntiSocialBehaviourParent", "frmPersonAntiSocialBehaviour", url, "Add Case note");
+    }
+    function confirmDeletePersonAntiSocialBehaviourCaseNote(id) {
+        displayDeleteAlert("Are you sure you want to delete this note?", deletePersonAntiSocialBehaviourCaseNote, id);
+    }
+
+    function deletePersonAntiSocialBehaviourCaseNote(id) {
+        $.ajax({
+            type: 'GET',
+            url: "/PersonAntiSocialBehaviourCaseNote/Delete",
+            data: { id: id },
+            success: function (returnResult) {
+                if (returnResult.success) {
+                    swal("Deleted!", returnResult.message, "success");
+                    loadAntiSocialbehaviour($('#PersonId').val());
+                } else {
+                    swal({
+                        title: "Delete failed",
+                        text: returnResult.message
+                    });
+                }
+
+            }
+        });
+    }
+</script>
+
+
+

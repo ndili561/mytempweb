@@ -1,0 +1,144 @@
+﻿@using CRM.Entity.Settings
+@using CRM.Web.Helpers
+@using Microsoft.Extensions.Options
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
+@inject IOptions<WebApplicationSettings> WebApplicationSettings
+@*@inject ILoginUserService LoginUserService
+    @{
+        var user = LoginUserService.GetCurrentUser();
+        var name = user.Claims.FirstOrDefault(x => x.Type == "name")?.Value;
+    }*@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <h1 class="text-danger">
+                        CRM
+                        @*<img alt="image" class="img-circle" src="~/Images/profile_small.jpg" />*@
+                    </h1>
+                    @*<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <label class="m-t-xs">
+                                    <strong class="font-bold">Environment</strong>
+                                </label> <label class="text-danger">@hostingEnv.EnvironmentName</label>
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">Developer</strong>
+                                </span> <span class="text-muted text-xs block">Developer <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="@Url.Action("Profile", "Home")">Profile</a></li>
+                            <li><a href="@Url.Action("Contacts", "Home")">Contacts</a></li>
+                                <li><a href="@Url.Action("Mailbox", "Home")">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Logout", "Home")">Logout</a></li>
+                        </ul>*@
+                </div>
+                <div class="logo-element">
+                    In
+                </div>
+            </li>
+            <li class="divider"></li>
+            <li class="@Html.IsSelected(controller: "Person")">
+                <a href="@Url.Action("Index", "Person")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Person</span></a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#" onclick="openApp('@WebApplicationSettings.Value.AssetUrl')"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Asset Application</span></a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#" onclick="openApp('@WebApplicationSettings.Value.VblUrl')"><i class="fa fa-address-book"></i> <span class="nav-label" data-i18n="nav.dashboard">VBL Application</span></a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#" onclick="openApp('@WebApplicationSettings.Value.CloudVoidsUrl')"><i class="fa fa-tasks"></i> <span class="nav-label" data-i18n="nav.dashboard">Void Application</span></a>
+            </li>
+            <li class="divider"></li>
+            @*<li class="@Html.IsSelected(controller: "Property")">
+                    <a href="@Url.Action("Index", "Property")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Property</span></a>
+                </li>*@
+            <li class="divider"></li>
+
+            @*<li class="@Html.IsSelected(controller: "Person")">
+                    <a href="@Url.Action("Index", "Person")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Person</span></a>
+                </li>
+                <li class="divider"></li>
+                <li class="@Html.IsSelected(controller: "Audit")">
+                    <a href="@Url.Action("Index", "Audit")"><i class="fa fa-globe"></i> <span class="nav-label" data-i18n="nav.miscellaneous">Audit</span></a>
+                </li>
+                <li class="divider"></li>
+                <li class="@Html.IsSelected(controller: "User")">
+                    <a href="@Url.Action("Index", "User")"><i class="fa fa-address-book"></i> <span class="nav-label" data-i18n="nav.forms">Employee</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Email")">
+                    <a href="@Url.Action("Inbox", "Email")"><i class="fa fa-envelope"></i> <span class="nav-label" data-i18n="nav.mailbox">Email</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Calendar")">
+                    <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label" data-i18n="nav.appviews">Tasks</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="@Url.Action("Index", "Calendar")"><i class="fa fa-calendar-plus-o"></i> Calendar</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Schedule", "Calendar")"><i class="fa fa-calendar-times-o"></i> Schedular</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="@Html.IsSelected(controller: "Document")">
+                    <a href="@Url.Action("Index", "Document")"><i class="fa fa-file"></i> <span class="nav-label" data-i18n="nav.file">Document</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Sms")">
+                    <a href="@Url.Action("Detail", "Sms")"><i class="fa fa-mobile-phone"></i> <span class="nav-label" data-i18n="nav.mailbox">Sms</span></a>
+                </li>*@
+            <li>
+                <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label" data-i18n="nav.appviews">Adminstrator</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#"><i class="fa fa-lightbulb-o"></i> Lookup<span class="nav-label fa arrow" data-i18n="nav.lookup"></span></a>
+                        <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "AntiSocialBehaviourCaseClosureReason,AntiSocialBehaviourCaseStatus,AntiSocialBehaviourType,AddressType,AlertStatus,AlertType,CaseStatus,CaseType,Ethnicity,Gender,Language,NationalityType,TaskNotificationType,TaskReminderType,TaskSatus,Title", cssClass: "in")">
+                            <li>
+                                <a href="#"><i class="fa fa-chevron-circle-right"></i> Anti Social Behaviour<span class="nav-label fa arrow" data-i18n="nav.lookup"></span></a>
+                                <ul class="nav nav-third-level collapse @Html.IsSelected(controller: "AntiSocialBehaviourCaseClosureReason,AntiSocialBehaviourCaseStatus,AntiSocialBehaviourType", cssClass: "in")">
+                                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AntiSocialBehaviourCaseClosureReason")">Closure Reason</a></li>
+                                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AntiSocialBehaviourCaseStatus")">Case Status</a></li>
+                                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AntiSocialBehaviourType")">Case Type</a></li>
+                                </ul>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AddressType")">Address Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AlertStatus")">Alert Status</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AlertGroup")">Alert Group</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "AlertType")">Alert Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "PersonCaseStatus")">Case Status</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "PersonCaseType")">Case Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Ethnicity")">Ethnicity</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "FlagGroup")">Flag Group</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "FlagType")">Flag Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Gender")">Gender</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Language")">Language</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "NationalityType")">Nationality</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Relationship")">Relationship</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Priority")">Priority</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Title")">Title</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "TaskNotificationType")">Task Notification Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "TaskReminderType")">Task Reminder Type</a></li>
+                            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "TaskStatus")">Task Status</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "UserGroup")"><i class="fa fa-user-plus"></i> User Group</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "WebApplication")"><i class="fa fa-anchor"></i> Applications</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Task")"><i class="fa fa-wrench"></i>Tasks</a>
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
+</nav>

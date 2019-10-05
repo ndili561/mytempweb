@@ -1,0 +1,62 @@
+﻿@*@using Incommunities.GatewayCore.Entity.Model
+@model List<PersonModel>
+@if (Model != null)
+{
+    <div class="sidebar-container">
+
+        @foreach (var person in Model)
+        {
+            <div class="sidebar-message">
+                <a onclick="register_popup('@person.Id', '@person.Forename');">
+                    <img width="30" height="30" src="/Images/a5.jpg" />
+                    <span> @person.ToString()</span>
+                </a>
+            </div>
+        }
+    </div>
+
+}*@
+<div class="sidebar-container">
+    <div class="sidebar-message">
+        <!-- Pass username and display name to register popup -->
+        <a onclick="register_popup('kim', 'Kim');">
+            <img width="30" height="30" src="/Images/a5.jpg" />
+            <span> Kim Smith</span>
+        </a>
+    </div>
+
+    <div class="sidebar-message">
+        <a onclick="register_popup('mike', 'Mike');">
+            <img width="30" height="30" src="/Images/a7.jpg" />
+            <span>Mike Loreipsum</span>
+        </a>
+    </div>
+
+    <div class="sidebar-message">
+        <a onclick="register_popup('monica', 'Monica');">
+            <img width="30" height="30" src="/Images/profile.jpg" />
+            <span>Monica Smith</span>
+        </a>
+    </div>
+
+    <div class="sidebar-message">
+        <a onclick="register_popup('janet', 'Janet');">
+            <img width="30" height="30" src="/Images/a4.jpg" />
+            <span>Janet Rosowski</span>
+        </a>
+    </div>
+
+    <div class="sidebar-message">
+        <a onclick="register_popup('Chris', 'Chris');">
+            <img width="30" height="30" src="/Images/a3.jpg" />
+            <span>Chris Johnatan Overtunk</span>
+        </a>
+    </div>
+
+    <div class="sidebar-message">
+        <a onclick="register_popup('Kim', 'Kim');">
+            <img width="30" height="30" src="/Images/a2.jpg" />
+            <span>Kim Smith</span>
+        </a>
+    </div>
+</div>

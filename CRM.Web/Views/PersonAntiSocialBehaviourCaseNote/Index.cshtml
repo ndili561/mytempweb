@@ -1,0 +1,40 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Customer
+@model PersonAntiSocialBehaviourCaseNoteSearchModel
+@{
+    ViewData["Title"] = "Person Anti Social Behaviours";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAntiSocialBehaviourParent" })
+
+@section Scripts {
+    <script type="text/javascript">
+        function displayEditPersonAntiSocialBehaviour(alertGroupId) {
+            var url = "/PersonAntiSocialBehaviourCaseNote/Edit?id=" + alertGroupId;
+            showDialog("divPersonAntiSocialBehaviourCaseNoteParent", "frmPersonAntiSocialBehaviourCaseNote", url, "Edit Case Note");
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

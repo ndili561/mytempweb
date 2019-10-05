@@ -1,0 +1,18 @@
+﻿@using CRM.Entity.Model.Lookup
+@model List<TaskTypeDto>
+    <div class="row">
+        <div class="col-md-2">Drag a event and drop into calendar.</div>
+        <div id="divCrmCalendarEvents" class="col-md-8">
+            @foreach (var task in Model)
+            {
+                <div class="fc-event m-l-lg col-md-1 @task.CssClass" style="@task.CssStyle" data-id="@task.Id" data-class="@task.CssClass">@task.Name</div>
+            }
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary fa fa-plus" type="button" onclick="$('#divFileUpload').toggle();">Toggle file upload</button> 
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-success fa fa-save" id="saveCalendar" onclick="savecalendar()">Save Calendar</button>
+        </div>
+    </div>
+

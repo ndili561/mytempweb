@@ -1,0 +1,6 @@
+﻿@using Newtonsoft.Json
+@model List<Incommunities.Logistics.APIClient.Models.Stock.JsonContactCalendarTask>
+<div class="panel-body" id='divLogisticscalendar'></div>
+<script type="text/javascript">
+    userCalendarTasks =@Html.Raw(JsonConvert.SerializeObject(Model));
+</script>

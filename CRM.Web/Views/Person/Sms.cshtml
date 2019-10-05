@@ -1,0 +1,50 @@
+﻿@using CRM.Entity.Search.Customer
+@model PersonSmsSearchModel
+@{
+    ViewData["Title"] = "Sms";
+}
+<form asp-action="SmsGrid" method="GET">
+    
+    <input type="hidden" asp-for="@Model.TargetGridId" />
+    <input type="hidden" asp-for="@Model.PersonId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("SmsGrid", Model)
+                        </div>
+                        <div id="divComposeSms">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="ibox">
+    <div class="pull-left">
+        <button type="button" onclick="$('#tabEmail').click();" class="btn btn-primary">Emails</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" onclick="$('#tabChangeLog').click();" class="btn btn-warning">Change Log</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        attachSearchGridEvents();
+        $('.btn-filter').click();
+    });
+  
+</script>
+

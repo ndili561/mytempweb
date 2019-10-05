@@ -1,0 +1,45 @@
+﻿@using CRM.Entity.Model
+@model CRM.Entity.Search.Employee.MenuItemSearchModel
+@{
+    ViewData["Title"] = "Application Menu Item";
+}
+<form asp-action="MenuItemGrid" method="get">
+    <input type="hidden" asp-for="@Model.TargetGridId" />
+    <input type="hidden" asp-for="@Model.ApplicationId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("MenuItemGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divMenuItemParent" })
+<script type="text/javascript">
+    function displayEditMenuItem(id) {
+        var url = "/MenuItem/Edit?id=" + id;
+        showDialog("divMenuItemParent", "frmWebApplication", url, "Edit Menu Item");
+    }
+    function displayAddMenuItem(applicationId) {
+        var url = "/MenuItem/Add?applicationId=" + applicationId;
+        showDialog("divMenuItemParent", "frmWebApplication", url, "Edit Menu Item");
+    }
+    $(function () {
+        attachSearchGridEvents();
+        $('.btn-filter').click();
+    });
+</script>
+

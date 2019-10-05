@@ -1,0 +1,44 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model AntiSocialBehaviourCaseClosureReasonSearchModel
+@{
+    ViewData["Title"] = "Anti Social Behaviour Case Closure Reason List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divAntiSocialBehaviourCaseClosureReasonParent" })
+
+@section Scripts {
+<script type="text/javascript">
+    function displayAddAntiSocialBehaviourCaseClosureReason() {
+        var url = "/AntiSocialBehaviourCaseClosureReason/Create";
+        showDialog("divAntiSocialBehaviourCaseClosureReasonParent", "frmAntiSocialBehaviourCaseClosureReason", url, "Create Anti Social Behaviour Case Closure Reason");
+    }
+    function displayEditAntiSocialBehaviourCaseClosureReason(id) {
+        var url = "/AntiSocialBehaviourCaseClosureReason/Edit?id=" + id;
+        showDialog("divAntiSocialBehaviourCaseClosureReasonParent", "frmAntiSocialBehaviourCaseClosureReason", url, "Edit Anti Social Behaviour Case Closure Reason");
+    }
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

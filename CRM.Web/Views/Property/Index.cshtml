@@ -1,0 +1,70 @@
+﻿@using CRM.Entity.Search.Common
+@model PropertyDetailViewSearchModel
+@{
+    ViewData["Title"] = "Property List";
+}
+<form asp-action="Grid" method="GET">
+    
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="row m-b m-t">
+                                    <div class="col-md-4">
+                                        <label asp-for="PropertyCode" class="col-md-3 control-label"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="PropertyCode" class="form-control filterInput" placeholder="Please type full property code" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="PropertyType" class="col-md-3 control-label"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="PropertyType" class="form-control filterInput" placeholder="Type BLOCK, FLAT etc...." />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="NumberOfBedRooms" class="col-md-4 control-label"></label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="NumberOfBedRooms" class="form-control filterInput" type="number" step="1" min="0" placeholder="Please type number e.g. 1, 2 " />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-b m-t">
+                                    <div class="col-md-4">
+                                        <label asp-for="Address" class="col-md-3 control-label"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Address" class="form-control filterInput" placeholder="Please type address" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Postcode" class="col-md-3 control-label"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Postcode" class="form-control" placeholder="Please type postcode" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="CurrentMainTenant" class="col-md-4 control-label"></label>
+                                        <div class="col-sm-8">
+                                            <search />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

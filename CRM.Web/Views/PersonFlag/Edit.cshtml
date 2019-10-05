@@ -1,0 +1,51 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonFlagDto
+<form id="editPersonFlag" class="form-horizontal" role="form" asp-controller="PersonFlag" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="form-group m-b">
+        <label asp-for="Person.Forename" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Forename" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Person.Surname" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Surname" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-t">
+        <label asp-for="FlagGroupId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="FlagGroupId" asp-items="@Model.FlagGroupSelectList" class="form-control dropdown"></select>
+            <span asp-validation-for="FlagGroupId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group m-t">
+        <label asp-for="FlagTypeId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="FlagTypeId" asp-items="@Model.FlagTypeSelectList" class="form-control dropdown"></select>
+            <span asp-validation-for="FlagTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Details" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <textarea asp-for="Details" class="form-control"></textarea>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editPersonFlag").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

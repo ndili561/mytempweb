@@ -1,0 +1,26 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Customer
+@model PersonFlagSearchModel
+@{
+    ViewData["Title"] = "Person Flags";
+}
+<form asp-action="PersonFlagGrid" method="GET">
+    
+    <input type="hidden" asp-for="PersonId"/>
+    <div id="@Model.TargetGridId" class="grid">
+        @Html.Partial("PersonFlagGrid", Model)
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonFlagParent" })
+
+<script type="text/javascript">
+    function displayAddPersonFlag(personId) {
+        var url = "/PersonFlag/Create?personId=" + personId;
+        showDialog("divPersonFlagParent", "frmPersonFlag", url, "Add Person Flag");
+    }
+    function displayEditPersonFlag(id) {
+        var url = "/PersonFlag/Edit?id=" + id;
+        showDialog("divPersonFlagParent", "frmPersonFlag", url, "Edit Person Flag");
+    }
+</script>
+

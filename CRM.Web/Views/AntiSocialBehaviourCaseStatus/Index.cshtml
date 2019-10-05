@@ -1,0 +1,44 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model AntiSocialBehaviourCaseStatusSearchModel
+@{
+    ViewData["Title"] = "Anti Social Behaviour Case Status";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divAntiSocialBehaviourCaseStatusParent" })
+
+@section Scripts {
+<script type="text/javascript">
+    function displayAddAntiSocialBehaviourCaseStatus() {
+        var url = "/AntiSocialBehaviourCaseStatus/Create" ;
+        showDialog("divAntiSocialBehaviourCaseStatusParent", "frmAntiSocialBehaviourCaseStatus", url, "Create Anti Social Behaviour Case Status");
+    }
+    function displayEditAntiSocialBehaviourCaseStatus(addressTypeId) {
+        var url = "/AntiSocialBehaviourCaseStatus/Edit?id=" + addressTypeId;
+        showDialog("divAntiSocialBehaviourCaseStatusParent", "frmAntiSocialBehaviourCaseStatus", url, "Edit Anti Social Behaviour Case Status");
+    }
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

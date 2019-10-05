@@ -1,0 +1,126 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonDto
+<form id="frmPersonDetails" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="GlobalIdentityKey" />
+    <input type="hidden" asp-for="ApplicationId" />
+    <input type="hidden" asp-for="ApplicantTypeId" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="panel-body">
+        <label>@Html.ValidationSummary(true)</label>
+        <span asp-validation-for="RowVersion" class="text-danger"></span>
+        <label id="errorMessage" class="text-danger">@Model.ErrorMessage</label>
+        <div class="clearfix"></div>
+        @if (!Model.IsMainContactPerson)
+        {
+            <div class="form-group ">
+                <label asp-for="MainContactPersonId" class="col-md-3 control-label"></label>
+                <div id="divMainContactPersonId"></div>
+                <div class="col-sm-9">
+                    <input id="mainperson-input" value="@Model.MainContactPerson?.Forename @Model.MainContactPerson?.Surname"  type="text" data-provide="typeahead" placeholder="please type..." class="typeahead form-control" />
+                    <input type="hidden" asp-for="MainContactPersonId" />
+                </div>
+            </div>
+            <hr/>
+        }
+        <div class="form-group ">
+            <label asp-for="Title" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="TitleId" asp-items="@Model.TitleSelectList" class="form-control dropdown m-b"></select>
+                <span asp-validation-for="TitleId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group disabled">
+            <label asp-for="Forename" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Forename" class="form-control m-b" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Surname" class="form-control m-b" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateOfBirth" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <div class="input-group date">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input asp-for="DateOfBirth" type="text" class="form-control m-b" value="@Model.DateOfBirth?.ToShortDateString()">
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group ">
+            <label asp-for="NationalInsuranceNumber" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="NationalInsuranceNumber" class="form-control m-b" placeholder="Please type in [AA 1234567 A] format" />
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="GenderId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="GenderId" asp-items="@Model.GenderSelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="EthnicityId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="EthnicityId" asp-items="@Model.EthnicitySelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="EthnicityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="NationalityTypeId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="NationalityTypeId" asp-items="@Model.NationalitySelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="NationalityTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="PreferredLanguageId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="PreferredLanguageId" asp-items="@Model.LanguageSelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="PreferredLanguageId" class="text-danger"></span>
+            </div>
+        </div>
+        @if (!Model.IsMainContactPerson)
+        {
+            <div class="form-group ">
+                <label asp-for="RelationshipId" class="col-md-3 control-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="RelationshipId" asp-items="@Model.RelationshipSelectList" class="form-control dropdown  m-b"></select>
+                    <span asp-validation-for="RelationshipId" class="text-danger"></span>
+                </div>
+            </div>   
+        }
+       
+    </div>
+    <div id="divPersonChangeLog">
+
+    </div>
+</form>
+<div class="row m-t">
+    <div class="col-md-3">
+        <button type="button" onclick="$('#tabPersonDetail').click();" class="btn btn-primary pull-left">View Details</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="viewPersonChangeLog(@Model.Id);" class="btn btn-info pull-right">Change Log</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="updatePersonDetails();" class="btn btn-success pull-right">Save</button>
+    </div>
+    <div class="col-md-3 ">
+        <button type="button" onclick="$('#tabContactDetail').click();" class="btn btn-warning pull-right">Contact By Detail</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        initializeTypeahedPersonSearch("#mainperson-input");
+    });
+</script>

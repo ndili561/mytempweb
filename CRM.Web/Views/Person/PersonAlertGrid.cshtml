@@ -1,0 +1,102 @@
+﻿@using CRM.Entity.Search.Customer
+@model PersonAlertSearchModel
+@{
+    ViewData["Title"] = "Person Alerts";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th><sort display-name="Status" column-name="AlertStatus/Name" /></th>
+                <th><sort display-name="Type" column-name="AlertType/Name" /></th>
+                <th><sort display-name="Details" column-name="Details" /></th>
+                <th><sort display-name="Raised On" column-name="RaisedOn" /></th>
+                <th><sort display-name="Created By" column-name="CreatedBy" /></th>
+
+                <th class="text-right"> <button type="button" id="btnAddPersonAlert" onclick="displayAddPersonAlert(@Model.PersonId)" class="btn btn-success btn-labeled fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.PersonAlertSearchResult.Any())
+            {
+                foreach (var item in Model.PersonAlertSearchResult)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlertStatus.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlertType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Details)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RaisedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td class="text-right">
+                            <button type="button" id="btnShowPersonAlertComment_@item.Id" onclick="loadPersonAlertComment('@item.Id')" class="btn btn-info fa fa-info"></button>
+                            <button type="button" id="btnEditPersonAlert_@item.Id" onclick="displayEditPersonAlert('@item.Id')" class="btn btn-warning fa fa-edit"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <div style="display: none" id="collapsablePersonAlertCommentDiv_@item.Id">
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                    <tr id="row1" class="red-bg" style="background-color:red !important">
+                        <td><i id="alert1" class="fa fas fa-exclamation-triangle "></i></td>
+                        <td>Active</td>
+                        <td>Debt Assist</td>
+                        <td>This customer is in debt, and needs to speak to a member of our financial department</td>
+                        <td>13/02/2018</td>
+                        <td><button type="button" id="acknowledgedbutton1" onclick="acknowledge(1)" class="btn btn-success btn-labeled fa fa-check"> Acknowledged</button></td>
+                    </tr>
+                <tr id="row2" class="yellow-bg">
+                    <td><i id="alert2" class="fa fas fa-exclamation-triangle "></i></td>
+                    <td>Onhold</td>
+                    <td>Gas Servicing</td>
+                    <td>This customer's property has a gas service that is overdue.</td>
+                    <td>13/02/2018</td>
+                    <td><button type="button" id="acknowledgedbutton2" onclick="acknowledge(2)" class="btn btn-success btn-labeled fa fa-check"> Acknowledged</button></td>
+                </tr>
+                <tr id="row3">
+                    <td><i id="alert3" class=""></i></td>
+                    <td>Closed</td>
+                    <td>VBL</td>
+                    <td>This customer has a property match.</td>
+                    <td>13/01/2017</td>
+                    <td><button type="button" id="acknowledgedbutton3" onclick="acknowledge(3)" class="btn btn-success btn-labeled fa fa-check disabled"> Acknowledged</button></td>
+                </tr>
+                <tr id="row4">
+                    <td><i id="alert4" class=""></i></td>
+                    <td>Cancelled</td>
+                    <td>Keys Due</td>
+                    <td>This customer's keys need handing over.</td>
+                    <td>13/01/2016</td>
+                    <td><button type="button" id="acknowledgedbutton4" onclick="acknowledge(4)" class="btn btn-success btn-labeled fa fa-check disabled"> Acknowledged</button></td>
+                </tr>
+            }
+
+        </tbody>
+        @*<tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>*@
+    </table>
+</div>

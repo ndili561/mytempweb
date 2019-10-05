@@ -1,0 +1,39 @@
+﻿@model CRM.Entity.Search.Employee.AuditSearchModel
+@{
+    ViewData["Title"] = "Person Change Log";
+}
+<form asp-action="ChangeLogGrid" method="GET">
+    
+    <input type="hidden" asp-for="@Model.TargetGridId" />
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.PersonId" />
+    <input type="hidden" asp-for="@Model.SelectedTable" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <button type="button" class="btn btn-info fa fa-toggle-down" onclick="$('#@Model.TargetGridId').toggle()">Toggle</button>
+                        <div class="ibox-title" style="display: none">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("ChangeLogGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        attachSearchGridEvents();
+        $('.btn-filter').click();
+    });
+</script>
+

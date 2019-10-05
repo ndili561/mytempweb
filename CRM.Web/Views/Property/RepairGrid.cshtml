@@ -1,0 +1,91 @@
+﻿@model CRM.Entity.Search.Common.RepairSearchModel
+@{
+    ViewData["Title"] = "Repairs";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th class="col-lg-2">
+                <sort display-name="Repair Id" column-name="RepairId" />
+            </th>
+            <th class="col-lg-2">
+                <sort display-name="Description" column-name="RepairDescription" />
+            </th>
+            <th class="col-lg-1">
+                <sort display-name="Job Status" column-name="VisitStatus" />
+            </th>
+            <th class="col-lg-2">
+                <sort display-name="Operative" column-name="OperativeCode" />
+            </th>
+            <th class="col-lg-1">
+                <sort display-name="Trades" column-name="Trades" />
+            </th>
+            <th class="col-lg-2">
+                <sort display-name="Date" column-name="ArrivalDate" />
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.RepairSearchResult.Any())
+        {
+            foreach (var item in Model.RepairSearchResult)
+            {
+                <tr>
+                    <td>
+                        <span style="max-width: 50px" class="label label-default"> Repair</span><span class="label label-primary"> @item.RepairId</span><br /><br />
+                        <span style="max-width: 50px" class="label label-default">Repair Line</span><span class="label label-success"> @item.RepairLineId</span><br /><br />
+                        <span style="max-width: 50px" class="label label-default"> Visit</span><span class="label label-info"> @item.VisitId</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RepairDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobStatus)
+                        @if (item.JobStatus == "In Transit")
+                        {
+                            @Html.ActionLink("Track", "TrackOperative", "Property", new { propertyreference = item.PropertyReference, operativeCode = item.OperativeCode }, new { @class = "btn btn-info fa fa-truck" })
+                        }
+                    </td>
+                    <td>
+                        @if (item.Operative == "Unassigned")
+                        {
+                            <span class="label label-danger">@item.Operative</span>
+                        }
+                        else
+                        {
+                            <span style="min-width: 50px" class="label label-default"> Code</span><span style="min-width: 125px" class="label label-primary"> @item.OperativeCode</span><br /><br />
+                            <span style="min-width: 50px" class="label label-default"> Name</span><span style="min-width: 125px" class="label label-success"> @item.OperativeName</span><br /><br />
+                            <span style="min-width: 50px" class="label label-default"> Mobile</span><span style="min-width: 125px" class="label label-info"> @item.OperativeMobileNumber</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trades)
+                    </td>
+                    <td>
+                        @{ var arrivalDate = item.ArrivalDate.HasValue ? item.ArrivalDate.ToString() : "Not available";
+        var appointmentDate = item.ArrivalDate.HasValue ? item.AppointmentDate.ToString() : "Not available";
+        var estimateDate = item.ArrivalDate.HasValue ? item.RepairEstimate.ToString() : "Not available";
+                    <span class="label label-default"> Arrival</span>
+                    <span style="max-width: 125px" class="label label-primary"> @arrivalDate</span>
+                    <br /><br />
+                    <span class="label label-default"> Appointment</span>
+                    <span style="max-width: 125px" class="label label-success"> @appointmentDate</span>
+                    <br /> <br />
+                    <span class="label label-default"> Estimate</span>
+                    <span style="max-width: 125px" class="label label-info"> @estimateDate</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="tc" colspan="12">
+                <pageing />
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,89 @@
+﻿@using CRM.Entity.Model
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model CRM.Entity.Search.Common.CalendarSearchModel
+<div class="ibox">
+    @Html.Partial("_CalendarFilter", Model)
+    <div class="ibox-title">
+        <div class="row m-t" id="divFileUpload">
+            @using (Html.BeginForm("UploadFile", "Calendar", FormMethod.Post, new {@name = "frmCalendarFile", id = "frmCalendarFile", @enctype = "multipart/form-data"}))
+            {
+                <div class="row">
+                    <div id="previews" class="dz-default dz-message box__input">
+                        <div style="text-align: center">
+                            <i class="fa fa-cloud-upload" style="font-size: 23px; position: relative; top: 4px;"></i>
+                            <span style="margin-left: 20px">Drop calendar files to attach or browse</span>
+                        </div>
+                    </div>
+                    <div class="meter">
+                        <span class="roller"></span>
+                    </div>
+                    <div id="previewFiles"></div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input class="form-control m-b" type="text" id="Comment" name="Comment" value="" placeholder="Please type comment for document">
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" onclick="downloadCalendarFile()" id="downloadFile" class="btn btn-info fa fa-download m-b" value="button">Download</button>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" id="uploadFile" class="btn btn-success fa fa-upload m-b" value="Upload"/>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @Html.Partial("_TaskType", @Model.TaskTypes)
+    </div>
+<form id="frmSaveCalendarTask" method="post" asp-page-handler="UpdateCalender">
+    
+    <div class="ibox" id='divCrmCalendar'></div>
+</form>
+
+    @Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divTaskParent" })
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/extlibs/iCheck/custom.css" />
+        <link rel="stylesheet" href="~/extlibs/fullcalendar/fullcalendar.css" />
+    </environment>
+}
+@section Scripts {
+    <environment names="Development">
+        <script src="~/extlibs/moment/moment.js"></script>
+        <script src="~/extlibs/iCheck/icheck.min.js"></script>
+        <script src="~/extlibs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="~/js/calendar/core.js"></script>
+        <script src="~/js/calendar/Index.js"></script>
+        <script src="~/extlibs/jquery-ui/jquery-ui.js"></script>
+        <script src="~/extlibs/typehead/bootstrap3-typeahead.min.js"></script>
+        <script src="~/extlibs/underscore/underscore.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/extlibs/moment/moment.js"></script>
+        <script src="~/extlibs/iCheck/icheck.min.js"></script>
+        <script src="~/extlibs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="~/js/calendar/core.js"></script>
+        <script src="~/js/calendar/Index.js"></script>
+        <script src="~/extlibs/jquery-ui/jquery-ui.js"></script>
+        <script src="~/extlibs/typehead/bootstrap3-typeahead.min.js"></script>
+        <script src="~/extlibs/underscore/underscore.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#divFileUpload').hide();
+            initializeTypeahedPersonSearch("#PersonId");
+            initializeDropzone('#frmCalendarFile', '#uploadFile', "UploadedFile", '#EmployeeId');
+        });
+        function downloadCalendarFile() {
+            if ($('#EmployeeId').val() === "" || $('#EmployeeId').val() === "0") {
+                displayErrorMessage("Please select employee");
+            } else {
+                window.location.href = 'Calendar/Download?employeeId='+$('#EmployeeId').val();
+            }
+        }
+      
+    </script>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

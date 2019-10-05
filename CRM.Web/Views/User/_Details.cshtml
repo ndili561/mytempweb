@@ -1,0 +1,50 @@
+﻿@using CRM.Entity.Model.Employee
+@model UserDto
+<form id="frmUserDetails" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="Id" />
+    
+    <div class="panel-body">
+        <div class="form-group disabled">
+            <label asp-for="Name" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Name" class="form-control m-b"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeRef" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="EmployeeRef" class="form-control m-b"/>
+            </div>
+        </div>
+       
+        <div class="form-group ">
+            <label asp-for="Telephone" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Telephone" class="form-control m-b"/>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="ManagerId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="ManagerId" asp-items="@Model.ManagerSelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="ManagerId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="UserGroupId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="UserGroupId" asp-items="@Model.UserGroupSelectList" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="UserGroupId" class="text-danger"></span>
+            </div>
+        </div>
+       
+    </div>
+</form>
+<div class="ibox m-t">
+    <div class="pull-left">
+        <button type="button" onclick="updateUserDetails();" class="btn btn-primary">Save changes</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" onclick="$('#tabApplications').click();" class="btn btn-warning">Applications</button>
+    </div>
+</div>

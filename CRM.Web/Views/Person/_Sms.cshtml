@@ -1,0 +1,35 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonSmsDto
+<form id="frmPersonSms" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="PersonId" />
+    <input type="hidden" asp-for="SmsId" />
+    
+    <div class="panel-body">
+        <div class="form-group ">
+            <label asp-for="Sms.ReceiverNumber" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Sms.ReceiverNumber" class="form-control m-b" />
+                <span asp-validation-for="Sms.ReceiverNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="Sms.Message" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Sms.Message" class="form-control m-b"/>
+                <span asp-validation-for="Sms.Message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="Comment" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Comment" class="form-control m-b"/>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="sendPersonSms();" class="btn btn-primary pull-right">Send</button>
+        </div>
+    </div>
+</form>
+

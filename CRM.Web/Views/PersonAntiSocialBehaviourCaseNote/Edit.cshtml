@@ -1,0 +1,70 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonAntiSocialBehaviourCaseNoteDto
+<form id="editPersonAntiSocialBehaviourNote" class="form-horizontal" role="form" asp-controller="PersonAntiSocialBehaviourCaseNote" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonAntiSocialBehaviourId)
+    @Html.HiddenFor(model => model.PersonAntiSocialBehaviour.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+
+    <div class="form-group m-b">
+        <label asp-for="PersonAntiSocialBehaviour.Person.Forename" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="PersonAntiSocialBehaviour.Person.Forename" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="PersonAntiSocialBehaviour.Person.Surname" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="PersonAntiSocialBehaviour.Person.Surname" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label class="col-md-3 control-label">Case Type</label>
+        <div class="col-sm-9">
+            <input asp-for="PersonAntiSocialBehaviour.CaseType.Name" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label class="col-md-3 control-label"> Case Status</label>
+        <div class="col-sm-9">
+            <input asp-for="PersonAntiSocialBehaviour.CaseStatus.Name" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ActionDate" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <div class="input-group date">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+                <input asp-for="ActionDate" type="text" class="form-control m-b" value="@Model.ActionDate.ToShortDateString()">
+                <span asp-validation-for="ActionDate" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label asp-for="ActionTime" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="ActionTime" asp-items="@Model.ActionTimeSelectListItems" class="form-control dropdown  m-b"></select>
+            <span asp-validation-for="ActionTime" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Note" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <textarea asp-for="Note"  rows="10" class="form-control"></textarea>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editPersonAntiSocialBehaviourNote").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

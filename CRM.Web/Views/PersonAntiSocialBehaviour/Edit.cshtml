@@ -1,0 +1,92 @@
+﻿@using CRM.Entity.Model.Customer
+@model PersonAntiSocialBehaviourDto
+<form id="editPersonAntiSocialBehaviour" class="form-horizontal" role="form" asp-controller="PersonAntiSocialBehaviour" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+
+    <div class="form-group m-b">
+        <label asp-for="Person.Forename" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Forename" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="Person.Surname" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <input asp-for="Person.Surname" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="CaseTypeId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="CaseTypeId" asp-items="@Model.CaseTypeSelectListItems" class="form-control dropdown  m-b"></select>
+        </div>
+    </div>
+    <div class="form-group m-b">
+        <label asp-for="CaseStatusId" class="col-md-3 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="CaseStatusId" asp-items="@Model.CaseStatusSelectListItems" onchange="toggleDivCaseClosureReason()" class="form-control dropdown  m-b"></select>
+            <span asp-validation-for="CaseStatusId" class="text-danger"></span>
+        </div>
+    </div>
+    @if (Model.Id > 0)
+    {
+        <div class="form-group m-b" style="display: none" id="divCaseClosureReason">
+            <label asp-for="CaseClosureReason" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="CaseClosureReason" class="form-control" />
+            </div>
+        </div> 
+    }
+    else
+    {
+        <div class="form-group">
+            <label asp-for="ActionDate" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <div class="input-group date">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input asp-for="ActionDate" type="text" class="form-control m-b" value="@Model.ActionDate.ToShortDateString()">
+                    <span asp-validation-for="ActionDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label asp-for="ActionTime" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="ActionTime" asp-items="@Model.ActionTimeSelectListItems" class="form-control dropdown  m-b"></select>
+                <span asp-validation-for="ActionTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Notes" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <textarea asp-for="Notes" rows="10" class="form-control"></textarea>
+            </div>
+        </div>
+    }
+    
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editPersonAntiSocialBehaviour").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+    function toggleDivCaseClosureReason() {
+        var element = $("#editPersonAntiSocialBehaviour");
+        if ($("#CaseStatusId").val() === '4' && element) {
+            $element.show();
+        } else {
+            $element.hide();
+        }
+       
+    }
+</script>

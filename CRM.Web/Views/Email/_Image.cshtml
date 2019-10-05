@@ -1,0 +1,10 @@
+﻿@using CRM.Entity.Model.Common
+@model  DocumentDto
+ <div class="image">
+    <img alt="image" class="img-responsive" src="@Model.RelativePath">
+</div>
+ <div class="file-name">
+     @Model.Name
+     <br />
+     <small>Added: @Model.CreatedDate</small>
+ </div>

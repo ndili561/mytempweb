@@ -1,0 +1,43 @@
+﻿@using CRM.Entity.Search.Common
+@model PropertyVoidViewSearchModel
+@{
+    ViewData["Title"] = "Void List";
+}
+@if (string.IsNullOrWhiteSpace(Model.PropertyCode))
+{
+<span> No property is selected to view void.</span>
+}
+else
+{
+    <form asp-action="VoidGrid" method="get">
+        <input type="hidden" asp-for="@Model.PropertyCode" />
+        <div class="row">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <div id="filterDiv" class="row">
+                                    <div class="col-md-12">
+                                        <search />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="@Model.TargetGridId" class="grid">
+                                @Html.Partial("VoidGrid", Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            initializeGrid();
+        });
+    </script>
+}
+
+
+

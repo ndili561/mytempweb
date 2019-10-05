@@ -1,0 +1,45 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model AlertTypeSearchModel
+@{
+    ViewData["Title"] = "Alert Type List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divAlertTypeParent" })
+
+@section Scripts {
+    <script type="text/javascript">
+        function displayEditAlertType(alertTypeId) {
+            var url = "/AlertType/Edit?id=" + alertTypeId;
+            showDialog("divAlertTypeParent", "frmAlertType", url, "Edit Alert Type");
+        }
+        function displayAddAlertType() {
+            debugger;
+            var url = "/AlertType/Create";
+            showDialog("divAlertTypeParent", "frmAlertType", url, "Edit Alert Type");
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

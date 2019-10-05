@@ -1,0 +1,38 @@
+﻿@using CRM.Entity.Search.Employee
+@model ApplicationTaskSearchModel
+@{
+    ViewData["Title"] = "Persons";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Application" column-name="Application/Name" /></th>
+                <th><sort display-name="Task" column-name="Task/Name" /></th>
+                <th><sort display-name="IsActive" column-name="IsActive" /></th>
+                <th class="text-right"> <button type="button" id="btnAddApplicationTask" onclick="displayAddApplicationTask()" class="btn btn-success btn-labeled fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ApplicationTaskSearchResult)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Application.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Task.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

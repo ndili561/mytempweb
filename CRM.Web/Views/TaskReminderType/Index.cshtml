@@ -1,0 +1,40 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model TaskReminderTypeSearchModel
+@{
+    ViewData["Title"] = "Task Reminder List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divTaskReminderTypeParent" })
+
+@section Scripts {
+    <script type="text/javascript">
+        function displayEditTaskReminderType(id) {
+            var url = "/TaskReminderType/Edit?id=" + id;
+            showDialog("divTaskReminderTypeParent", "frmTaskReminderType", url, "Edit Address Type");
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

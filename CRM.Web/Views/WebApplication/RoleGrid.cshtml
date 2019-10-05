@@ -1,0 +1,43 @@
+﻿@model CRM.Entity.Search.Employee.RoleSearchModel
+@{
+    ViewData["Title"] = "Application Role";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Name" column-name="RoleName" /></th>
+                <th><sort display-name="Description" column-name="RoleDescription" /></th>
+                <th>IsActive</th>
+                <th class="text-right"> <button type="button" id="btnAddApplicationRole" onclick="displayAddApplicationRole()" class="btn btn-success btn-labeled fa fa-plus">Add Role</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RoleSearchResult)
+            {
+            <tr>
+                <td>
+                    <a href="#" onclick="loadPermission(@item.Id)">@item.RoleName</a>
+                </td>
+                <td>
+                    <a href="#" onclick="loadPermission(@item.Id)">@item.RoleDescription</a>
+                </td>
+                <td>
+                    <a href="#" onclick="loadPermission(@item.Id)">@item.IsActive</a>
+                </td>
+                <td>
+                    <button type="button" id="btnManagePermission" onclick="loadPermission(@item.Id)" class="btn btn-success btn-labeled fa fa-edit pull-right">Manage Permission</button>
+                    <button type="button" id="btnEditApplicationRole" onclick="displayEditApplicationRole(@item.Id)" class="btn btn-primary btn-labeled fa fa-edit pull-right">Edit Role</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

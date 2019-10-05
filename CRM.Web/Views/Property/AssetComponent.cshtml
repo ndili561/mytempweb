@@ -1,0 +1,13 @@
+﻿@using CRM.Entity.Model.Asset
+@model AssetModel
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Main Components</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var item in Model.AssetComponents.Where(x => x.ComponentElementId == 16 || x.ComponentElementId == 18 || x.ComponentElementId == 1 || x.ComponentElementId == 19 || x.ComponentElementId == 28))
+        {
+            @Html.Partial("_AssetComponent", item)
+        }
+    </div>
+</div>

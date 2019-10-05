@@ -1,0 +1,71 @@
+﻿@using CRM.Entity.Search.Common
+@model EmailSearchModel
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.Partial("_Category", Model.EmailDto)
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <h2>
+                Inbox (16)
+            </h2>
+            <div class="mail-box-header">
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+                    </div>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Refresh inbox"><i class="fa fa-refresh"></i> Refresh</button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read"><i class="fa fa-eye"></i> </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as important"><i class="fa fa-exclamation"></i> </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+                </div>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+                    <form asp-action="Grid" method="get" class="form-horizontal">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <div id="filterDiv" class="row">
+                                    <div class="mail-search pull-right">
+                                        <search />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="@Model.TargetGridId" class="grid">
+                                @Html.Partial("Grid", Model)
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/extlibs/iCheck/custom.css" />
+}
+
+@section Scripts {
+    <script src="~/extlibs/iCheck/icheck.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
+    </script>
+}

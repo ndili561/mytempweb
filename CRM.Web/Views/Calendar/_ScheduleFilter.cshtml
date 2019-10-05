@@ -1,0 +1,22 @@
+﻿@using CRM.Entity.Search.Common
+@model CalendarSearchModel
+<div class="row">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="form-group">
+                <label asp-for="ApplicationId" class="col-md-1 control-label"></label>
+                <div class="col-sm-2">
+                    @Html.DropDownListFor(model => model.ApplicationId, Model.ApplicationList, new { @class = "form-control dropdown" })
+                </div>
+                <label asp-for="EmployeeIds" class="col-md-1 control-label"></label>
+                <div class="col-sm-4">
+                    <select asp-for="EmployeeIds" asp-items="@Model.EmployeeList" multiple="multiple" class="form-control chosen-select"></select>
+                </div>
+                <label asp-for="TaskTypeId" class="col-md-1 control-label"></label>
+                <div class="col-sm-2">
+                    @Html.DropDownListFor(model => model.TaskTypeId, Model.TaskTypeList, new { @class = "form-control dropdown" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

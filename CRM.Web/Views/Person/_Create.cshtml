@@ -1,0 +1,94 @@
+﻿
+@model Incommunities.Logistics.APIClient.Models.Common.UserCalendarTaskDto
+@using (Ajax.BeginForm("CreateCalendarTask", "CalendarTask", null, options, new { @class = "form-horizontal", @id = "frmProductType" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ContactId)
+    @Html.HiddenFor(model => model.TaskTypeName)
+    <div id="divCalendarTask" class="panel @ViewBag.EditPanelStyle">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @ViewBag.EditPanelText Calendar Task
+                <span class="text-danger">@Model.ErrorMessage</span>
+                <span>@Html.ValidationSummary(true)</span>
+            </h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row pad-all">
+                <div class="form-group">
+                    @Html.Label("Assigned to", new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Contact.Name, new { @class = "form-control" })
+                        @Html.HiddenFor(model => Model.Contact.Name)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.AssignedBy, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.AssignedBy, new { @class = "form-control" })
+                        @Html.HiddenFor(model => Model.AssignedBy)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.TaskName, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.TaskName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => Model.TaskName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.TaskStatus, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.EnumDropDownListFor(model => Model.TaskStatus, new { @class = "form-control", onchange = "onTaskStatusChange()", type = "number", step = "any" })
+                        @Html.ValidationMessageFor(model => Model.TaskStatus)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.CalendarTaskTypeId, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.CalendarTaskTypeId, Model.CalendarTaskTypeSelectList, new { @class = "form-control dropdown" })
+                        @Html.ValidationMessageFor(model => Model.CalendarTaskTypeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.ScheduleStartDate, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => Model.ScheduleStartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datetime", @style = "height:30px" })
+                        @Html.ValidationMessageFor(model => Model.ScheduleStartDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.ScheduleStartTimeString, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.ScheduleStartTimeString, SelectedListHelper.GetTimeIntervalForCalendar(Model.ScheduleStartTimeString), new { @class = "form-control dropdown" })
+                        @Html.ValidationMessageFor(model => Model.ScheduleStartTimeString)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.ScheduleEndDate, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => Model.ScheduleEndDate, "{0:dd/MM/yyyy}", new { @class = "form-control datetime", @style = "height:30px" })
+                        @Html.ValidationMessageFor(model => Model.ScheduleEndDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.ScheduleEndTimeString, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.ScheduleEndTimeString, SelectedListHelper.GetTimeIntervalForCalendar(Model.ScheduleEndTimeString), new { @class = "form-control dropdown" })
+                        @Html.ValidationMessageFor(model => Model.ScheduleEndTimeString)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group form-group-lg">
+        <div class="row">
+            <div class="col-xs-3 col-xs-offset-2">
+                <button id="btnClose" class="btn btn-sm btn-danger btn-labeled fa fa-ban" data-dismiss="modal" title="Cancel">Cancel</button>
+            </div>
+            <div class="col-xs-3 col-xs-offset-2">
+                <button id="btnCreateCalendarTask" type="submit" class="btn btn-sm btn-mint btn-labeled fa fa-floppy-o pull-right" title="Save">Save</button>
+            </div>
+        </div>
+    </div>
+}

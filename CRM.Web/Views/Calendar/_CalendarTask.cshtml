@@ -1,0 +1,7 @@
+﻿@using CRM.Entity.Model.Common
+@using Newtonsoft.Json
+@model List<JsonEmployeeTask>
+<div class="ibox" id='divCrmCalendar'></div>
+<script type="text/javascript">
+    userCalendarTasks =@Html.Raw(JsonConvert.SerializeObject(Model));
+</script>

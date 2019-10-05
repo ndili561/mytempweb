@@ -1,0 +1,41 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Customer
+@model PersonCaseSearchModel
+@{
+    ViewData["Title"] = "Person Cases";
+}
+<form asp-action="PersonCaseGrid" method="GET">
+    
+    <input type="hidden" asp-for="PersonId" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("PersonCaseGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonCaseParent" })
+<script type="text/javascript">
+    function displayAddPersonCase(personId) {
+        var url = "/PersonCase/Create?personId=" + personId;
+        showDialog("divPersonCaseParent", "frmPersonCase", url, "Add Person Case");
+    }
+    function displayEditPersonCase(alertGroupId) {
+        var url = "/PersonCase/Edit?id=" + alertGroupId;
+        showDialog("divPersonCaseParent", "frmPersonCase", url, "Edit Person Case");
+    }
+</script>

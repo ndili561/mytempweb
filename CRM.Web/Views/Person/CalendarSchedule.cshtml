@@ -1,0 +1,33 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Model.Employee
+@model UserCalendarTaskDto
+<div id="page-content">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.Label("Employee:", new { @class = "col-sm-2 control-label pull-left" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.Id, Model.ContactSelectedList, new { @class = "form-control dropdown", onchange = "getContactScheduling()" })
+                    </div>
+                    @Html.Label("Task:", new { @class = "col-sm-2 control-label pull-left" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.CalendarTaskId, Model.CalendarTaskTypeSelectList, new { @class = "form-control dropdown", onchange = "getContactScheduling()" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body" id='divTaskSchedule'></div>
+        </div>
+    </div>
+</div>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divCalendarTaskParent", ChildDivId = "divCalendarTaskChild", Style = "z-index: auto;" })
+
+@section scripts {
+    @Scripts.Render("~/js/fullcalendar")
+    @Html.PageScriptFile("Index.js")
+    @Html.PageScriptFile("Reshedule.js")
+}

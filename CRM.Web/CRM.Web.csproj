@@ -1,0 +1,407 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Script\**" />
+    <Compile Remove="wwwroot\extlibs\bootstrap-datepicker\dist\**" />
+    <Compile Remove="wwwroot\extlibs\bootstrap-datepicker\docs\**" />
+    <Compile Remove="wwwroot\extlibs\bootstrap-datepicker\tests\**" />
+    <Compile Remove="wwwroot\extlibs\jquery-ui\ui\**" />
+    <Compile Remove="wwwroot\extlibs\moment\src\**" />
+    <Compile Remove="wwwroot\lib\**" />
+    <Compile Remove="wwwroot\uploads\**" />
+    <Content Remove="Script\**" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\dist\**" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\docs\**" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\tests\**" />
+    <Content Remove="wwwroot\extlibs\jquery-ui\ui\**" />
+    <Content Remove="wwwroot\extlibs\moment\src\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\uploads\**" />
+    <EmbeddedResource Remove="Script\**" />
+    <EmbeddedResource Remove="wwwroot\extlibs\bootstrap-datepicker\dist\**" />
+    <EmbeddedResource Remove="wwwroot\extlibs\bootstrap-datepicker\docs\**" />
+    <EmbeddedResource Remove="wwwroot\extlibs\bootstrap-datepicker\tests\**" />
+    <EmbeddedResource Remove="wwwroot\extlibs\jquery-ui\ui\**" />
+    <EmbeddedResource Remove="wwwroot\extlibs\moment\src\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\**" />
+    <None Remove="Script\**" />
+    <None Remove="wwwroot\extlibs\bootstrap-datepicker\dist\**" />
+    <None Remove="wwwroot\extlibs\bootstrap-datepicker\docs\**" />
+    <None Remove="wwwroot\extlibs\bootstrap-datepicker\tests\**" />
+    <None Remove="wwwroot\extlibs\jquery-ui\ui\**" />
+    <None Remove="wwwroot\extlibs\moment\src\**" />
+    <None Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\uploads\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Person\Calendar.cshtml" />
+    <Content Remove="Views\Person\CalendarSchedule.cshtml" />
+    <Content Remove="Views\Person\_CalendarTask.cshtml" />
+    <Content Remove="Views\Person\_Create.cshtml" />
+    <Content Remove="Views\Person\_ScheduleCalendarTask.cshtml" />
+    <Content Remove="wwwroot\extlibs\animate.css\css\animate.min.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker3.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker3.min.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap-theme.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap.css.map" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\extlibs\bootstrap\css\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Remove="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Remove="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Remove="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Remove="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Remove="wwwroot\extlibs\bootstrap\js\bootstrap.js" />
+    <Content Remove="wwwroot\extlibs\bootstrap\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\extlibs\bootstrap\js\npm.js" />
+    <Content Remove="wwwroot\extlibs\font-awesome\css\font-awesome.css" />
+    <Content Remove="wwwroot\extlibs\font-awesome\css\font-awesome.css.map" />
+    <Content Remove="wwwroot\extlibs\font-awesome\css\font-awesome.min.css" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\font-awesome.css" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\font-awesome.css.map" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\font-awesome.min.css" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Remove="wwwroot\extlibs\font-awesome\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\extlibs\fullcalendar\fullcalendar.css" />
+    <Content Remove="wwwroot\extlibs\fullcalendar\fullcalendar.min.js" />
+    <Content Remove="wwwroot\extlibs\fullcalendar\fullcalendar.print.css" />
+    <Content Remove="wwwroot\extlibs\inspinia\css\inspinia.css" />
+    <Content Remove="wwwroot\extlibs\inspinia\css\inspinia.min.css" />
+    <Content Remove="wwwroot\extlibs\inspinia\js\inspinia.js" />
+    <Content Remove="wwwroot\extlibs\inspinia\js\inspinia.min.js" />
+    <Content Remove="wwwroot\extlibs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Remove="wwwroot\extlibs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Remove="wwwroot\extlibs\jquery-validation\jquery.validate.js" />
+    <Content Remove="wwwroot\extlibs\jquery-validation\jquery.validate.min.js" />
+    <Content Remove="wwwroot\extlibs\pacejs\css\pace-theme-loading-bar.css" />
+    <Content Remove="wwwroot\extlibs\pacejs\css\pace-theme-loading-bar.min.css" />
+    <Content Remove="wwwroot\extlibs\pacejs\js\pace.js" />
+    <Content Remove="wwwroot\extlibs\pacejs\js\pace.min.js" />
+    <Content Remove="wwwroot\js\crmfullcalendar.js" />
+    <Content Remove="wwwroot\js\TitleTest.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Person\Details.cshtml~RFb2ba8ef.TMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
+    <PackageReference Include="Elmah.Io.AspNetCore" Version="3.5.54" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="OctoPack" Version="3.6.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Utilities\Core.Utilities.csproj" />
+    <ProjectReference Include="..\CRM.Entity\CRM.Entity.csproj" />
+    <ProjectReference Include="..\CRM.WebApiClient\CRM.WebApiClient.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\extlibs\jquery\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\extlibs\animate.css\css\animate.min.css" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.css" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker3.css" />
+    <None Include="wwwroot\extlibs\bootstrap-datepicker\bootstrap-datepicker3.min.css" />
+    <None Include="wwwroot\extlibs\bootstrap-tagsinput\bootstrap-tagsinput.js" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap-theme.css" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap-theme.min.css" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap.css" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\extlibs\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="wwwroot\extlibs\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\extlibs\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\extlibs\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\extlibs\bootstrap\js\npm.js" />
+    <None Include="wwwroot\extlibs\colorpicker\bootstrap-colorpicker.min.js" />
+    <None Include="wwwroot\extlibs\duallistbox\jquery.bootstrap-duallistbox.js" />
+    <None Include="wwwroot\extlibs\jasny-bootstrap\css\jasny-bootstrap.css.map" />
+    <None Include="wwwroot\extlibs\jasny-bootstrap\js\jasny-bootstrap.js" />
+    <None Include="wwwroot\extlibs\jasny-bootstrap\js\jasny-bootstrap.min.js" />
+    <None Include="wwwroot\extlibs\select2\js\select2.full.js" />
+    <None Include="wwwroot\extlibs\select2\js\select2.full.min.js" />
+    <None Include="wwwroot\extlibs\select2\js\select2.js" />
+    <None Include="wwwroot\extlibs\select2\js\select2.min.js" />
+    <None Include="wwwroot\extlibs\dropzone\dropzone.js" />
+    <None Include="wwwroot\extlibs\font-awesome\css\font-awesome.css" />
+    <None Include="wwwroot\extlibs\font-awesome\css\font-awesome.css.map" />
+    <None Include="wwwroot\extlibs\font-awesome\css\font-awesome.min.css" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\font-awesome.css" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\font-awesome.css.map" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\font-awesome.min.css" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\extlibs\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\extlibs\fullcalendar\fullcalendar.css" />
+    <None Include="wwwroot\extlibs\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\extlibs\fullcalendar\fullcalendar.print.css" />
+    <None Include="wwwroot\extlibs\iCheck\icheck.min.js" />
+    <None Include="wwwroot\extlibs\inspinia\css\inspinia.css" />
+    <None Include="wwwroot\extlibs\inspinia\css\inspinia.min.css" />
+    <None Include="wwwroot\extlibs\inspinia\js\inspinia.js" />
+    <None Include="wwwroot\extlibs\inspinia\js\inspinia.min.js" />
+    <None Include="wwwroot\extlibs\jquery-ui\jquery-ui.js" />
+    <None Include="wwwroot\extlibs\jquery-ui\jquery-ui.min.js" />
+    <None Include="wwwroot\extlibs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\extlibs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\extlibs\jquery-validation\jquery.validate.js" />
+    <None Include="wwwroot\extlibs\jquery-validation\jquery.validate.min.js" />
+    <None Include="wwwroot\extlibs\moment\moment.js" />
+    <None Include="wwwroot\extlibs\pacejs\css\pace-theme-loading-bar.css" />
+    <None Include="wwwroot\extlibs\pacejs\css\pace-theme-loading-bar.min.css" />
+    <None Include="wwwroot\extlibs\pacejs\js\pace.js" />
+    <None Include="wwwroot\extlibs\pacejs\js\pace.min.js" />
+    <None Include="wwwroot\extlibs\pdfjs\pdf.js" />
+    <None Include="wwwroot\extlibs\pdfjs\pdf.worker.js" />
+    <None Include="wwwroot\extlibs\summernote\summernote.min.js" />
+    <None Include="wwwroot\extlibs\typehead\bootstrap3-typeahead.min.js" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\js\Calendar\Core.js" />
+    <None Include="wwwroot\js\TitleTest.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\User\Document.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\DocumentGrid.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\Email.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\EmailGrid.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\Sms.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\SmsGrid.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Documents\Images\Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Documents\PDF\Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\animate.css\css\animate.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\bootstrap-datepicker\css\bootstrap-datepicker.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\bootstrap-datepicker\css\bootstrap-datepicker3.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\bootstrap-datepicker\js\bootstrap-datepicker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\bootstrap-tagsinput\bootstrap-tagsinput.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\bootstrap-tagsinput\bootstrap-tagsinput.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\colorpicker\bootstrap-colorpicker.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\colorpicker\bootstrap-colorpicker.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\cropper\css\cropper.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\cropper\js\cropper.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\basic.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\basic.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\dropzone-amd-module.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\dropzone.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\dropzone.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\dropzone.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\dropzone\dropzone.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\duallistbox\bootstrap-duallistbox.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\duallistbox\jquery.bootstrap-duallistbox.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\a8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\profile.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\images\profile_small.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\inspinia\css\patterns\header-profile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\metismenu\css\metisMenu.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\metismenu\css\metisMenu.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\metismenu\js\metisMenu.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\metismenu\js\metisMenu.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\pdfjs\pdf.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\pdfjs\pdf.worker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\slimscroll\jquery.slimscroll.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\slimscroll\jquery.slimscroll.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\summernote\summernote-bs3.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\summernote\summernote.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\summernote\summernote.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\sweetalert\css\sweetalert.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\sweetalert\js\sweetalert-dev.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\sweetalert\js\sweetalert.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\toastr\css\toastr.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\toastr\css\toastr.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\toastr\js\toastr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\toastr\js\toastr.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\underscore\underscore.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\extlibs\underscore\underscore.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\appsetting.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\Calendar\Core.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\Calendar\Index.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\Calendar\Reschedule.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\chatbox.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\Grid.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\site.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\trackoperative.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\trackproperty.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\trackvan.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

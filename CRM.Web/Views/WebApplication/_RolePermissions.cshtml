@@ -1,0 +1,30 @@
+﻿@using CRM.Entity.Model.Employee
+@model RoleDto
+
+<form id="frmRolePermissions" class="wizard-big">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ApplicationId)
+    @Html.HiddenFor(model => model.Id, new { id = "RoleId" })
+    @Html.HiddenFor(model => model.RowVersion)
+    <div class="form-group m-b">
+        <label class="control-label text-center">Role: @Model.RoleName </label>  
+    </div>
+    
+    <div id="divFullAccessRolePermissions" class="form-group m-b">
+        @Html.Partial("_FullAccessRolePermissions", Model)
+    </div>
+    <div class="clearfix"></div>
+    <div id="divReadonlyRolePermissions" class="form-group m-t">
+        @Html.Partial("_ReadonlyRolePermissions", Model)
+    </div>
+</form>
+<div class="clearfix"></div>
+<div class="ibox m-t">
+    <div class="pull-left m-l">
+        <button type="button" onclick="updateRolePermission();" class="btn btn-primary pull-left m-l">Update Permission</button>
+    </div>
+    <div class="pull-right m-r">
+        <button type="button" onclick="$('#divUserRoles').click();" class="btn btn-warning">Roles</button>
+    </div>
+</div>

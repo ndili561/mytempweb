@@ -1,0 +1,620 @@
+﻿@using CRM.Entity.Settings
+@using Microsoft.Extensions.Options
+@model CRM.Entity.Model.Common.PropertyModel
+@inject IOptions<HttpClientSettings> HttpClientSettings
+<hr>
+<div class="tabs-container">
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tab-PropertyDetails">Details</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Address">Address</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Neighbourhood">Neighbourhood</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Team">Team</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Income">Income</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-FTA">FTA</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Rent">Rent</a></li>
+    <li class=""><a data-toggle="tab" href="#tab-Patch">Patch</a></li>
+</ul>
+    <div class="tab-content">
+        <div id="tab-PropertyDetails" class="tab-pane active">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_TYPE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_TYPE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_CONDITION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_CONDITION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BUILD_DATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BUILD_DATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_STATUS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_STATUS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FLOOR_LEVEL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FLOOR_LEVEL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NUMBER_OF_BEDROOMS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NUMBER_OF_BEDROOMS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NUMBER_OF_BATHROOMS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NUMBER_OF_BATHROOMS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NUMBER_OF_BED_SPACES)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NUMBER_OF_BED_SPACES)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HEATING)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.HEATING" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GARDEN_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.GARDEN_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PARKING_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.PARKING_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LIFT_ACCESS_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.LIFT_ACCESS_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DISABLED_ACCESS_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.DISABLED_ACCESS_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ASBESTOS_CHECK_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.ASBESTOS_CHECK_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GAS_CHECK_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.GAS_CHECK_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NOT_WORTH_REPAIRING_FLAG)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.NOT_WORTH_REPAIRING_FLAG" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ABOUT_TURN)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.ABOUT_TURN" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HOMES_PLUS)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.HOMES_PLUS" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AGE_RESTRICTION)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.AGE_RESTRICTION" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AGE_RESTRICTION_LEVEL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AGE_RESTRICTION_LEVEL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AGE_RESTRICTION_AMOUNT)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AGE_RESTRICTION_AMOUNT)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PETS_ALLOWED)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.PETS_ALLOWED" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RAMPED_ACCESS)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.RAMPED_ACCESS" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STAIRLIFT)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.STAIRLIFT" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STEP_IN_SHOWER_TRAY)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.STEP_IN_SHOWER_TRAY" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LEVEL_ACCESS_PROP)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.LEVEL_ACCESS_PROP" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OVERBATH_SHOWER)
+                    </dt>
+                    <dd>
+                        <yesnoimage value="@Model.OVERBATH_SHOWER" />
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Address" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ADDRESS_LINE_1)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ADDRESS_LINE_1)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ADDRESS_LINE_2)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ADDRESS_LINE_2)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ADDRESS_LINE_3)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ADDRESS_LINE_3)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ADDRESS_LINE_4)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ADDRESS_LINE_4)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.POST_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.POST_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STREET_NAME)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.STREET_NAME)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Neighbourhood" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NEIGHBOURHOOD_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NEIGHBOURHOOD_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NEIGHBOURHOOD_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NEIGHBOURHOOD_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SUB_NEIGHBOURHOOD_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SUB_NEIGHBOURHOOD_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SUB_NEIGHBOURHOOD_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SUB_NEIGHBOURHOOD_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NEIGHBOURHOOD_COMB)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NEIGHBOURHOOD_COMB)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WARD_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.WARD_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WARD_NAME)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.WARD_NAME)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MANAGEMENT_AREA)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MANAGEMENT_AREA)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MANAGEMENT_AREA_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MANAGEMENT_AREA_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BLOCK_FLAG)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BLOCK_FLAG)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BLOCK_REFERENCE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BLOCK_REFERENCE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SCHEME)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SCHEME)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Team" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HOUSING_TEAM)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HOUSING_TEAM)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.INCOME_TEAM)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.INCOME_TEAM)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MANAGEMENT_TEAM)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MANAGEMENT_TEAM)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MGMT_AREA)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MGMT_AREA)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OFFICER_CODE_BASED_ON_STATUS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OFFICER_CODE_BASED_ON_STATUS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OFFICER_DESC_BASED_ON_STATUS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OFFICER_DESC_BASED_ON_STATUS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_STATUS_START_DATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_STATUS_START_DATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_SUB_STATUS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_SUB_STATUS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PROPERTY_SUB_STATUS_GROUP)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PROPERTY_SUB_STATUS_GROUP)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NORTHING)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NORTHING)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EASTING)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EASTING)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.COMPANY)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.COMPANY)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Income" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_INCOME_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_INCOME_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_INCOME_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_INCOME_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_INCOME_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_INCOME_PATCH_EMAIL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.INCOME_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.INCOME_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.INCOME_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.INCOME_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.INCOME_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.INCOME_PATCH_EMAIL)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-FTA" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_FTA_ARREARS_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_FTA_ARREARS_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_FTA_ARREARS_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_FTA_ARREARS_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CURRENT_FTA_ARREARS_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CURRENT_FTA_ARREARS_PATCH_EMAIL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FTA_ARREARS_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FTA_ARREARS_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FTA_ARREARS_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FTA_ARREARS_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FTA_ARREARS_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FTA_ARREARS_PATCH_EMAIL)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Rent" class="tab-pane">
+            <div class="panel-body">
+                <strong></strong>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TARGET_RENT_RATE_CURRENT)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TARGET_RENT_RATE_CURRENT)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TARGET_RENT_RATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TARGET_RENT_RATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TARGET_RENT_RATE_PREVIOUS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TARGET_RENT_RATE_PREVIOUS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TARGET_RENT_RATE_START_DATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TARGET_RENT_RATE_START_DATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TARGET_RENT_RATE_END_DATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TARGET_RENT_RATE_END_DATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AFFORDABLE_RENT)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AFFORDABLE_RENT)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RENT_COST_CENTRE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RENT_COST_CENTRE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NEW_TENANCY_DUE_TO_START)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NEW_TENANCY_DUE_TO_START)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.REPAIRS_COST_CENTRE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.REPAIRS_COST_CENTRE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ACCOUNTS_COMPANY)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ACCOUNTS_COMPANY)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div id="tab-Patch" class="tab-pane">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.REPAIRS_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.REPAIRS_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.REPAIRS_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.REPAIRS_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.REPAIRS_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.REPAIRS_PATCH_EMAIL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ESTATE_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ESTATE_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ESTATE_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ESTATE_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ESTATE_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ESTATE_PATCH_EMAIL)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MAINT_PATCH_CODE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MAINT_PATCH_CODE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MAINT_PATCH_DESCRIPTION)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MAINT_PATCH_DESCRIPTION)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MAINT_PATCH_EMAIL)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MAINT_PATCH_EMAIL)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

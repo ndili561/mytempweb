@@ -1,0 +1,50 @@
+﻿@model CRM.Entity.Search.Common.CalendarSearchModel
+@using CRM.Entity.Model
+<div id="page-content">
+    @Html.Partial("_ScheduleFilter", Model)
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body" id='divCrmSchedule'></div>
+        </div>
+    </div>
+</div>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divTaskParent" })
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/extlibs/iCheck/custom.css" />
+        <link rel="stylesheet" href="~/extlibs/fullcalendar/fullcalendar.css" />
+        <link rel="stylesheet" href="~/extlibs/fullcalendar/scheduler.min.css" />
+    </environment>
+}
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/extlibs/moment/moment.js"></script>
+        <script src="~/extlibs/iCheck/icheck.min.js"></script>
+        <script src="~/extlibs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="~/extlibs/fullcalendar/scheduler.min.js"></script>
+        <script src="~/extlibs/jquery-ui/jquery-ui.js"></script>
+        <script src="~/js/Calendar/core.js"></script>
+        <script src="~/js/Calendar/Index.js"></script>
+        <script src="~/js/Calendar/Reschedule.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/extlibs/moment/moment.js"></script>
+        <script src="~/extlibs/iCheck/icheck.min.js"></script>
+        <script src="~/extlibs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="~/extlibs/fullcalendar/scheduler.min.js"></script>
+        <script src="~/extlibs/jquery-ui/jquery-ui.js"></script>
+        <script src="~/js/Calendar/core.js"></script>
+        <script src="~/js/Calendar/Index.js"></script>
+        <script src="~/js/Calendar/Reschedule.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select").select2();
+            $("#EmployeeIds").change(function () {
+                getContactScheduling();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@using CRM.Entity.Model.Employee
+@model RoleDto
+<div id="divApplicationRole" class="form-group " style="min-height: 200px">
+    <label asp-for="LinkedReadonlyRolePermissionsIds" class="col-md-1 control-label"></label>
+    <div class="col-sm-11">
+        <select asp-for="LinkedReadonlyRolePermissionsIds" asp-items="@Model.ReadonlyPermisssionSelectList" class="form-control dual_select" multiple="multiple" name="LinkedReadonlyRolePermissionsIds"></select>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.dual_select').bootstrapDualListbox({
+            selectorMinimalHeight: 160
+        });
+        $('.moveall').css("display", "none");
+        $('.removeall').css("display", "none");
+        var readonlySelectedListbox = $("#bootstrap-duallistbox-selected-list_LinkedReadonlyRolePermissionsIds");
+        var readonlyNonSelectedListbox = $("#bootstrap-duallistbox-nonselected-list_LinkedReadonlyRolePermissionsIds");
+        
+        $(readonlySelectedListbox).on('change',
+            function () {
+                refreshFullAccessRolePermissions();
+            });
+          
+        $(readonlyNonSelectedListbox).on('change',
+            function () {
+                refreshFullAccessRolePermissions();
+            }); 
+    });
+</script>

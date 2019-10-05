@@ -1,0 +1,19 @@
+﻿@model CRM.Entity.Search.Customer.PersonSearchModel
+@{
+    ViewData["Title"] = "Household  member";
+}
+<form asp-action="Grid" method="GET">
+    
+    <input type="hidden" asp-for="TargetGridId" />
+    <input type="hidden" asp-for="MainContactPersonId" />
+    <input type="hidden" id="PersonId" name="PersonId" value="@Model.MainContactPersonId" />
+    <div id="@Model.TargetGridId" class="grid">
+        @Html.Partial("Grid", Model)
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        initializeGrid();
+    });
+</script>

@@ -1,0 +1,36 @@
+﻿@using CRM.Entity.Search.Common
+@model RepairSearchModel
+@{
+    ViewData["Title"] = "Repair List";
+}
+<form asp-action="RepairGrid" method="get">
+    <input type="hidden" asp-for="@Model.PropertyReference" />
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("RepairGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        initializeGrid();
+    });
+</script>
+
+
+

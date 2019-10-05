@@ -1,0 +1,42 @@
+﻿@using CRM.Entity.Model.Employee
+@model UserGroupDto
+<form id="editUserGroup" class="form-horizontal" role="form" asp-controller="UserGroup" asp-action="Save" data-ajax="true" data-ajax-complete="handleUserGroupUpdate" data-ajax-success="handleUserGroupUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <label asp-for="EmailAddress" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsActive" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editUserGroup").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

@@ -1,0 +1,160 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Settings
+@using Microsoft.Extensions.Options
+@model CRM.Entity.Search.Customer.PersonSearchModel
+@{
+    ViewData["Title"] = "Person List";
+}
+@inject IOptions<WebApplicationSettings> WebApplicationSettings
+<form asp-action="Grid" method="GET">
+    
+    <div class="ibox float-e-margins">
+        <div class="ibox-title center-block">
+
+            <div id="filterDiv" class="row">
+                <div class="row m-b m-t">
+                    <div class="col-md-2">
+                        <label asp-for="Forename" class="col-md-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Forename" class="form-control filterInput" placeholder="Forename" value="@Model.Forename"/>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="Surname" class="col-md-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="Surname" class="form-control filterInput" placeholder="Surname" value="@Model.Surname"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="DateOfBirth" class="col-md-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <div class="input-group date">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input asp-for="DateOfBirth" type="text" class="form-control" placeholder="DOB" value="@Model.DateOfBirth">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="MobileNumber" class="col-md-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="MobileNumber" class="form-control filterInput" placeholder="Mobile" value="@Model.MobileNumber"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="NationalInsuranceNumber" class="col-md-4 control-label"></label>
+                        <div class="col-sm-7">
+                            <input asp-for="NationalInsuranceNumber" class="form-control filterInput" placeholder="NI Number" value="@Model.NationalInsuranceNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-b m-t">
+                    <div class="col-md-2">
+                        <label asp-for="Address" class="col-md-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Address" class="form-control filterInput" placeholder="Address" value="@Model.Address"/>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="Postcode" class="col-md-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="Postcode" class="form-control" placeholder="Postcode" value="@Model.Postcode"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Email" class="col-md-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="Email" class="form-control filterInput" placeholder="Email" value="@Model.Email"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label asp-for="TelephoneNumber" class="col-md-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="TelephoneNumber" class="form-control filterInput" placeholder="Telephone" value="@Model.TelephoneNumber"/>
+                        </div>
+                    </div>
+
+                    <div class="pull-right col-md-3">
+                        <div class="col-md-4">
+                            <label asp-for="ApplicationId" class="control-label"></label>
+                        </div>
+                        <div class="col-md-8">
+                            <search/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div id="@Model.TargetGridId" class="grid">
+                @Html.Partial("Grid", Model)
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonParent" })
+
+@section Scripts {
+<script type="text/javascript">
+    $(function() {
+        $("#editPerson").submit(function(event) {
+            submitModalForm($(this), event);
+        });
+    });
+
+    function displayEditPerson(personId) {
+        var url = "/Person/Edit?personId=" + personId;
+        showDialog("divPersonParent", "frmPerson", url, "Edit Person");
+    }
+
+    function displayCreatePerson(mainContactPersonId) {
+        var url = "/Person/Create?mainContactPersonId=" + mainContactPersonId;
+        var title = "Add New Person";
+        if (mainContactPersonId > 0) {
+            title = "Add Household Member";
+        }
+        showDialog("divPersonParent", "frmPerson", url, title);
+    }
+    function callWebServer(id) {
+        var url = "/Person/getTest?id=" + id;
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function(data) {
+                $("html").empty();
+                $("html").append(data);
+            }
+
+
+        });
+    }
+
+    function posttoWebServer() {
+        
+    }
+
+    function callApi() {
+        debugger;
+        var url = "/Person/ReturnFromWebAPI";
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function(data) {
+                debugger;
+                $("html").empty();
+                console.log(data);
+                var stringData = data.toString();
+                $("html").html(stringData);
+            }
+
+
+        });
+    }
+</script>
+    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

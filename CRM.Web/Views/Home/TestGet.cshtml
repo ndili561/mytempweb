@@ -1,0 +1,29 @@
+﻿@model CRM.Entity.Model.Lookup.LookupDto
+
+<div class="col-xs-12 table-responsive">
+
+    @if (Model != null)
+    {
+        <label>Titles:</label>
+        <ul>
+            @foreach (var title in Model.Titles)
+            {
+                <li>@title.Name</li>
+            }
+        </ul>
+        <label>Gender:</label>
+        <ul>
+            @foreach (var title in Model.Genders)
+            {
+                <li>@title.Name</li>
+            }
+        </ul>
+        <label>Nationality:</label>
+        <ul>
+            @foreach (var title in Model.Genders)
+            {
+                <li>@title.Name</li>
+            }
+        </ul>
+    }
+</div>

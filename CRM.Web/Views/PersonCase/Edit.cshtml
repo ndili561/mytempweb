@@ -1,0 +1,52 @@
+﻿@model CRM.Entity.Model.Customer.PersonCaseDto
+<form id="editPersonCase" class="form-horizontal" role="form" asp-controller="PersonCase" asp-action="Save" data-ajax="true" data-ajax-complete="handleAddressTypeUpdate" data-ajax-success="handleAddressTypeUpdate" data-ajax-method="POST">
+    
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+    @Html.HiddenFor(model => model.RowVersion)
+    <p>
+        <span class="text-danger">@Model.ErrorMessage</span>
+        <span>@Html.ValidationSummary(true)</span>
+    </p>
+    <div class="ibox-content">
+        <div class="form-group m-b">
+            <label asp-for="Person.Forename" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Person.Forename" class="form-control"  disabled="disabled"/>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Person.Surname" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <input asp-for="Person.Surname" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+        <div class="form-group m-t">
+            <label asp-for="CaseTypeId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="CaseTypeId" asp-items="@Model.CaseTypeSelectList" class="form-control dropdown"></select>
+                <span asp-validation-for="CaseTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-t">
+            <label asp-for="PriorityId" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="PriorityId" asp-items="@Model.PrioritySelectList" class="form-control dropdown"></select>
+                <span asp-validation-for="PriorityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group m-b">
+            <label asp-for="Details" class="col-md-3 control-label"></label>
+            <div class="col-sm-9">
+                <textarea asp-for="Details" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#editPersonCase").submit(function (event) {
+            submitModalForm($(this), event);
+        });
+    });
+</script>

@@ -1,0 +1,49 @@
+﻿@using CRM.Entity.Settings
+@using Microsoft.Extensions.Options
+@model CRM.Entity.Model.Common.DeliveryRouteDto
+
+@inject IOptions<HttpClientSettings> HttpClientSettings
+@{
+    ViewData["Title"] = "Track Operative";
+}
+<head>
+    <title>Track Operative </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type='text/javascript' src="~/js/trackoperative.js"></script>
+    <script type='text/javascript' src='@HttpClientSettings.Value.BingMapUrl' async defer></script>
+    <script type='text/javascript'>
+        var operativeRouteData = { vanlongitude: "", vanlatitude: "", propertylongitude: "", propertylatitude: "" };
+        operativeRouteData.vanlongitude = @Math.Abs(Model.SourceLongitude)>0?@Model.SourceLongitude:0;
+        operativeRouteData.vanlatitude = @Math.Abs(Model.SourceLatitude)>0 ? @Model.SourceLatitude:0;
+        operativeRouteData.propertylongitude = @Math.Abs(Model.DestinationLongitude)>0 ? @Model.DestinationLongitude:0;
+        operativeRouteData.propertylatitude = @Math.Abs(Model.DestinationLatitude)>0 ? @Model.DestinationLatitude:0;
+    </script>
+</head>
+@if (Math.Abs(Model.SourceLongitude) > 0)
+{
+    <body onload="getMap();">
+        <div class="col-md-3">
+            <div class="row">
+                <div style="display: none" class="row" id='output'></div>
+                <div id="divRouteDetails" class="row">
+                    @Html.Partial("_RouteDetails", Model)
+                </div>
+            </div>
+            <div class="row">
+                Route
+                <div class="panel panel-body" id='directionsItinerary'>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id='myMap' style="height: 800px;"></div>
+    </body>
+}
+
+else
+{
+    <div>
+        <span class="text-danger">The tracking information is not available.</span>
+    </div>
+}
+

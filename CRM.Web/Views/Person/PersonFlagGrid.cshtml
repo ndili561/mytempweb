@@ -1,0 +1,93 @@
+﻿@using CRM.Entity.Search.Customer
+@model PersonFlagSearchModel
+@{
+    ViewData["Title"] = "Person Flags";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Flag Type" column-name="FlagType" /></th>
+                <th><sort display-name="Flag Group" column-name="FlagGroup" /></th>
+                <th><sort display-name="Details" column-name="Details" /></th>
+                <th><sort display-name="Raised On" column-name="RaisedOn" /></th>
+                <th class="text-right"> <button type="button" id="btnAddPersonFlag" onclick="displayAddPersonFlag(@Model.PersonId)" class="btn btn-success fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model != null && Model.PersonFlagSearchResult.Any())
+        {
+            foreach (var item in Model.PersonFlagSearchResult)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlagType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlagGroup.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RaisedOn)
+                    </td>
+                    <td class="text-right">
+
+                        <button type="button" id="btnEditPerson_@item.Id" onclick="displayEditPersonFlag('@item.Id')" class="btn btn-warning btn-labeled fa fa-edit">Edit</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        { 
+            <tr>
+              <td><i class="fa fa-flag fa-2x text-success"></i></td>
+                <td>Vulnerable Tenant</td>
+                <td>This customer has hearing difficulties</td>
+                <td>13/01/2016</td>
+                <td></td>
+          </tr>
+            <tr>
+                <td><i class="fa fa-flag fa-2x text-info"></i></td>
+                <td>Univeral Credit</td>
+                <td>This customer is signed up with universal Credit</td>
+                <td>13/01/2016</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><i class="fa fa-flag fa-2x text-danger"></i></td>
+                <td>Anti Social Behaviour</td>
+                <td>This customer has a history of violent behaviour.</td>
+                <td>13/01/2016</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-flag fa-2x text-mint"></i></td>
+                <td>VBL Status</td>
+                <td>This customer's VBL application is open.</td>
+                <td>13/01/2016</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-flag fa-2x text-primary"></i></td>
+                <td>Test</td>
+                <td>This is a test flag.</td>
+                <td>13/01/2016</td>
+                <td></td>
+            </tr>
+
+        }
+        </tbody>
+        @*<tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>*@
+    </table>
+</div>

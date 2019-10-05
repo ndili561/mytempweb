@@ -1,0 +1,40 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model TaskNotificationTypeSearchModel
+@{
+    ViewData["Title"] = "Nationality Type List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divTaskNotificationTypeParent" })
+
+@section Scripts {
+    <script type="text/javascript">
+        function displayEditTaskNotificationType(id) {
+            var url = "/TaskNotificationType/Edit?id=" + id;
+            showDialog("divTaskNotificationTypeParent", "frmTaskNotificationType", url, "Task Notification Type");
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

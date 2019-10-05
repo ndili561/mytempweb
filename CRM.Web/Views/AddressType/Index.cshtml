@@ -1,0 +1,44 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model AddressTypeSearchModel
+@{
+    ViewData["Title"] = "Address Type List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divAddressTypeParent" })
+
+@section Scripts {
+<script type="text/javascript">
+    function displayAddAddressType() {
+        var url = "/AddressType/Create";
+        showDialog("divAddressTypeParent", "frmAddressType", url, "Create Address Type");
+    }
+    function displayEditAddressType(addressTypeId) {
+        var url = "/AddressType/Edit?id=" + addressTypeId;
+        showDialog("divAddressTypeParent", "frmAddressType", url, "Edit Address Type");
+    }
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,35 @@
+﻿@using CRM.Entity.Search.Common
+@model SmsSearchModel
+@{
+    ViewData["Title"] = "Smses";
+}
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Number" column-name="ReceiverNumber" /></th>
+                <th><sort display-name="Message" column-name="Message" /></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.SmsSearchResult)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="tc" colspan="12">
+                <pageing/>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

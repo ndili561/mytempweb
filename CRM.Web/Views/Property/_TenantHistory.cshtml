@@ -1,0 +1,25 @@
+﻿@using CRM.Entity.Search.Customer
+@model TenantHistoryViewSearchModel
+@{
+    ViewData["Title"] = "Tenancy History";
+}
+<form asp-action="TenantHistoryViewGrid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <search />
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("TenantHistoryViewGrid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

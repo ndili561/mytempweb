@@ -1,0 +1,44 @@
+﻿@using CRM.Entity.Model
+@using CRM.Entity.Search.Lookup
+@model AlertGroupSearchModel
+@{
+    ViewData["Title"] = "Alert Group List";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divAlertGroupParent" })
+
+@section Scripts {
+<script Group="text/javascript">
+    function displayAddAlertGroup() {
+        var url = "/AlertGroup/Create";
+        showDialog("divAlertGroupParent", "frmAlertGroup", url, "Create Alert Group");
+    }
+    function displayEditAlertGroup(alertGroupId) {
+        var url = "/AlertGroup/Edit?id=" + alertGroupId;
+        showDialog("divAlertGroupParent", "frmAlertGroup", url, "Edit Alert Group");
+    }
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

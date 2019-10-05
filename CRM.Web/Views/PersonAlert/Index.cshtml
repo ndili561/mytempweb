@@ -1,0 +1,43 @@
+﻿@using CRM.Entity.Model
+@model CRM.Entity.Search.Customer.PersonAlertSearchModel
+@{
+    ViewData["Title"] = "Person Alert";
+}
+<form asp-action="Grid" method="get">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <div id="filterDiv" class="row">
+                                <div class="col-md-12">
+                                    <search />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@Model.TargetGridId" class="grid">
+                            @Html.Partial("Grid", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("ModalDialog", new ModalDialogViewModel { ParentDivId = "divPersonAlertParent" })
+
+@section Scripts {
+<script type="text/javascript">
+    function displayAddPersonAlert() {
+        var url = "/PersonAlert/Create" ;
+        showDialog("divPersonAlertParent", "frmPersonAlert", url, "Create Person Alert");
+    }
+    function displayEditPersonAlert(alertGroupId) {
+        var url = "/PersonAlert/Edit?id=" + alertGroupId;
+        showDialog("divPersonAlertParent", "frmPersonAlert", url, "Edit Person Alert");
+    }
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,45 @@
+﻿@using CRM.Entity.Search.Lookup
+@model GenderSearchModel
+@{
+    ViewData["Title"] = "GenderSearchModel";
+}
+<input type="hidden" asp-for="TargetGridId" />
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th><sort display-name="Name" column-name="Name" /></th>
+                <th><sort display-name="SortOrder" column-name="SortOrder" /></th>
+                <th><sort display-name="IsActive" column-name="IsActive" /></th>
+                <th class="text-right">  <button type="button" id="btnAddGender" onclick="displayAddGender()" class="btn btn-success btn-labeled fa fa-plus">Add</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.GenderSearchResult)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SortOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td class="text-right">
+                        <button type="button" id="btnEditPerson_@item.Id" onclick="displayEditGender('@item.Id')" class="btn btn-warning btn-labeled fa fa-edit">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="tc" colspan="12">
+                    <pageing />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
